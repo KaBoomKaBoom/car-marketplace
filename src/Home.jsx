@@ -11,11 +11,13 @@ function Home() {
         bodyType: '',
         fuel: '',
         drive: '',
-        priceRange: [0, 94990], // Default range based on the image (7290 - 94990)
         condition: '',
+        priceRange: [0, 94990], // Default range for Price
+        yearRange: [2010, 2025], // Default range for Year (adjust based on your data)
+        mileageRange: [0, 300000], // Default range for Mileage (adjust based on your data)
     });
 
-    // Function to randomly select 10-12 cars
+    // Function to set initial cars
     useEffect(() => {
         setCars([...carsData]);
     }, []);
@@ -42,15 +44,24 @@ function Home() {
         if (filters.drive) {
             updatedCars = updatedCars.filter((car) => car.Drive === filters.drive);
         }
+        if (filters.condition) {
+            updatedCars = updatedCars.filter((car) => car.Condition === filters.condition);
+        }
         if (filters.priceRange[0] > 0 || filters.priceRange[1] < 94990) {
             updatedCars = updatedCars.filter(
                 (car) => parseInt(car.Price) >= filters.priceRange[0] && parseInt(car.Price) <= filters.priceRange[1]
             );
         }
-        if (filters.condition) {
-            updatedCars = updatedCars.filter((car) => car.Condition === filters.condition);
+        if (filters.yearRange[0] > 2010 || filters.yearRange[1] < 2025) {
+            updatedCars = updatedCars.filter(
+                (car) => parseInt(car.Year) >= filters.yearRange[0] && parseInt(car.Year) <= filters.yearRange[1]
+            );
         }
-
+        if (filters.mileageRange[0] > 0 || filters.mileageRange[1] < 300000) {
+            updatedCars = updatedCars.filter(
+                (car) => parseInt(car.Mileage) >= filters.mileageRange[0] && parseInt(car.Mileage) <= filters.mileageRange[1]
+            );
+        }
 
         setFilteredCars(updatedCars);
     }, [filters, cars]);
@@ -70,7 +81,7 @@ function Home() {
             <div className="lg:w-3/4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
                     {filteredCars.map((car, index) => {
-                        const mileage = car.Mileage;
+                        const mileage = car.Mileage; // Use actual mileage from data
 
                         return (
                             <div key={index} className="bg-white dark:bg-gray-700 rounded-lg shadow-md relative transition-transform transform hover:scale-105 duration-300">
@@ -107,6 +118,7 @@ function Home() {
                     })}
                 </div>
             </div>
+
             {/* Filter Sidebar */}
             <div className="lg:w-1/4">
                 <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-md space-y-4">
@@ -141,6 +153,14 @@ function Home() {
                             type="range"
                             min="0"
                             max="94990"
+                            value={filters.priceRange[0]}
+                            onChange={(e) => setFilters({ ...filters, priceRange: [parseInt(e.target.value), filters.priceRange[1]] })}
+                            className="w-full mt-1"
+                        />
+                        <input
+                            type="range"
+                            min="0"
+                            max="94990"
                             value={filters.priceRange[1]}
                             onChange={(e) => setFilters({ ...filters, priceRange: [filters.priceRange[0], parseInt(e.target.value)] })}
                             className="w-full mt-1"
@@ -148,6 +168,52 @@ function Home() {
                         <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400">
                             <span>{filters.priceRange[0].toLocaleString()} €</span>
                             <span>{filters.priceRange[1].toLocaleString()} €</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label className="text-textLight dark:text-textDark">Year</label>
+                        <input
+                            type="range"
+                            min="2010"
+                            max="2025"
+                            value={filters.yearRange[0]}
+                            onChange={(e) => setFilters({ ...filters, yearRange: [parseInt(e.target.value), filters.yearRange[1]] })}
+                            className="w-full mt-1"
+                        />
+                        <input
+                            type="range"
+                            min="2010"
+                            max="2025"
+                            value={filters.yearRange[1]}
+                            onChange={(e) => setFilters({ ...filters, yearRange: [filters.yearRange[0], parseInt(e.target.value)] })}
+                            className="w-full mt-1"
+                        />
+                        <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400">
+                            <span>{filters.yearRange[0]}</span>
+                            <span>{filters.yearRange[1]}</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label className="text-textLight dark:text-textDark">Mileage</label>
+                        <input
+                            type="range"
+                            min="0"
+                            max="300000"
+                            value={filters.mileageRange[0]}
+                            onChange={(e) => setFilters({ ...filters, mileageRange: [parseInt(e.target.value), filters.mileageRange[1]] })}
+                            className="w-full mt-1"
+                        />
+                        <input
+                            type="range"
+                            min="0"
+                            max="300000"
+                            value={filters.mileageRange[1]}
+                            onChange={(e) => setFilters({ ...filters, mileageRange: [filters.mileageRange[0], parseInt(e.target.value)] })}
+                            className="w-full mt-1"
+                        />
+                        <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400">
+                            <span>{filters.mileageRange[0].toLocaleString()} km</span>
+                            <span>{filters.mileageRange[1].toLocaleString()} km</span>
                         </div>
                     </div>
                     <select
