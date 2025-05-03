@@ -12,6 +12,7 @@ function Home() {
         fuel: '',
         drive: '',
         priceRange: [0, 94990], // Default range based on the image (7290 - 94990)
+        condition: '',
     });
 
     // Function to randomly select 10-12 cars
@@ -46,6 +47,10 @@ function Home() {
                 (car) => parseInt(car.Price) >= filters.priceRange[0] && parseInt(car.Price) <= filters.priceRange[1]
             );
         }
+        if (filters.condition) {
+            updatedCars = updatedCars.filter((car) => car.Condition === filters.condition);
+        }
+
 
         setFilteredCars(updatedCars);
     }, [filters, cars]);
@@ -57,6 +62,7 @@ function Home() {
     const uniqueBodyTypes = [...new Set(carsData.map((car) => car.Type))];
     const uniqueFuels = [...new Set(carsData.map((car) => car.Fuel))];
     const uniqueDrives = [...new Set(carsData.map((car) => car.Drive))];
+    const uniqueConditions = [...new Set(carsData.map((car) => car.Condition))];
 
     return (
         <div className="flex flex-col lg:flex-row space-y-6 lg:space-y-0 lg:space-x-6 p-4">
@@ -104,7 +110,7 @@ function Home() {
             {/* Filter Sidebar */}
             <div className="lg:w-1/4">
                 <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-md space-y-4">
-                    <h2 className="text-lg font-semibold text-textLight dark:text-textDark">Filtre</h2>
+                    <h2 className="text-lg font-semibold text-textLight dark:text-textDark">Filters</h2>
                     <select
                         value={filters.make}
                         onChange={(e) => setFilters({ ...filters, make: e.target.value })}
@@ -189,6 +195,18 @@ function Home() {
                         {uniqueDrives.map((drive) => (
                             <option key={drive} value={drive}>
                                 {drive}
+                            </option>
+                        ))}
+                    </select>
+                    <select
+                        value={filters.condition}
+                        onChange={(e) => setFilters({ ...filters, condition: e.target.value })}
+                        className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
+                    >
+                        <option value="">Condition</option>
+                        {uniqueConditions.map((condition) => (
+                            <option key={condition} value={condition}>
+                                {condition}
                             </option>
                         ))}
                     </select>
