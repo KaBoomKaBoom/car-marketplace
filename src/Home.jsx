@@ -15,12 +15,12 @@ function Home() {
     return (
         <div className="space-y-6">
             {/* Car Showcase */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
                 {cars.map((car, index) => {
                     const mileage = car.Mileage
 
                     return (
-                        <div key={index} className="bg-white dark:bg-gray-700 rounded-lg shadow-md relative">
+                        <div key={index} className="bg-white dark:bg-gray-700 rounded-lg shadow-md relative transition-transform transform hover:scale-105 duration-300">
                             <img src={car.ImageURL} alt={`${car.Make} ${car.Model}`} className="w-full h-40 object-cover rounded-t-lg" />
                             <div className="p-4">
                                 {/* Make and Model */}
