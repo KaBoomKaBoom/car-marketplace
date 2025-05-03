@@ -6,7 +6,7 @@ function Home() {
 
   // Function to randomly select 10-12 cars
   useEffect(() => {
-    const numberOfCarsToShow = Math.floor(Math.random() * 3) + 10; // Randomly choose 10, 11, or 12
+    const numberOfCarsToShow = 12; // Randomly choose 10, 11, or 12
     const shuffledCars = [...carsData].sort(() => Math.random() - 0.5); // Shuffle the array
     const selectedCars = shuffledCars.slice(0, numberOfCarsToShow); // Take the first 10-12
     setCars(selectedCars);
@@ -21,6 +21,7 @@ function Home() {
             <img src={car.ImageURL} alt={car.Model} className="w-full h-40 object-cover rounded-t-lg" />
             <div className="p-2">
               <h3 className="text-lg font-semibold text-textLight dark:text-textDark">{car.Make + " " + car.Model}</h3>
+              <p className="text-gray-800 dark:text-gray-200 font-bold">{car.Mileage} km</p>
               <p className="text-gray-800 dark:text-gray-200 font-bold">${parseInt(car.Price).toLocaleString()}</p>
             </div>
           </div>

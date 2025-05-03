@@ -15,7 +15,8 @@
         "Category": "Personal",
         "Year": "2022",
         "ImageURL": "https://cdn.imagin.studio/getImage?angle=22&billingTag=web&customer=carwow&make=toyota&modelFamily=corolla&modelVariant=estate&modelYear=2024&paintDescription=solid-pure-white&paintId=pspc0323&width=400&zoomLevel=0&zoomType=fullscreen",
-        "Rating": "7"
+        "Rating": "7",
+        "Mileage": 353
     },
     {
         "Make": "Honda",
@@ -33,7 +34,8 @@
         "Category": "Personal",
         "Year": "2022",
         "ImageURL": "https://cdn.imagin.studio/getImage?angle=22&billingTag=web&customer=carwow&make=honda&modelFamily=civic&modelRange=civic-hev&modelVariant=ha&modelYear=2022&paintDescription=solid-sonic-grey&paintId=pspc0248&width=400&zoomLevel=0&zoomType=fullscreen",
-        "Rating": "8"
+        "Rating": "8",
+        "Mileage": 429
     },
     {
         "Make": "Toyota",
@@ -51,7 +53,8 @@
         "Category": "Personal",
         "Year": "2022",
         "ImageURL": "https://cdn.imagin.studio/getImage?angle=22&billingTag=web&customer=carwow&make=toyota&modelFamily=yaris&modelVariant=hatchback&modelYear=2024&paintDescription=metallic-decuma-grey&paintId=pspc0120&width=400&zoomLevel=0&zoomType=fullscreen",
-        "Rating": "9"
+        "Rating": "9",
+        "Mileage": 226
     },
     {
         "Make": "Suzuki",
@@ -69,7 +72,8 @@
         "Category": "Personal",
         "Year": "2022",
         "ImageURL": "https://cdn.imagin.studio/getImage?angle=22&billingTag=web&customer=carwow&make=suzuki&modelFamily=swace&modelVariant=estate&modelYear=2024&paintDescription=solid-solid-super-white&paintId=pspc0041&width=400&zoomLevel=0&zoomType=fullscreen",
-        "Rating": "6"
+        "Rating": "6",
+        "Mileage": 59
     },
     {
         "Make": "Toyota",
@@ -87,7 +91,8 @@
         "Category": "Family",
         "Year": "2019",
         "ImageURL": "https://cdn.imagin.studio/getImage?angle=22&billingTag=web&customer=carwow&make=toyota&modelFamily=yaris-cross&modelVariant=estate&modelYear=2024&paintDescription=solid-pure-white&paintId=pspc0323&width=400&zoomLevel=0&zoomType=fullscreen",
-        "Rating": "10"
+        "Rating": "10",
+        "Mileage": 69304
     },
     {
         "Make": "Honda",
@@ -105,7 +110,8 @@
         "Category": "Personal",
         "Year": "2022",
         "ImageURL": "https://cdn.imagin.studio/getImage?angle=22&billingTag=web&customer=carwow&make=honda&modelFamily=jazz&modelVariant=hatchback&modelYear=2025&paintDescription=solid-crystal-black&paintId=pspc0064&width=400&zoomLevel=0&zoomType=fullscreen",
-        "Rating": "9"
+        "Rating": "9",
+        "Mileage": 377
     },
     {
         "Make": "Mercedes",
@@ -123,7 +129,8 @@
         "Category": "Business",
         "Year": "2022",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=jaguar&filter%5Bmodel_review_slug%5D=xf-2020&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "9"
+        "Rating": "9",
+        "Mileage": 227
     },
     {
         "Make": "Nissan",
@@ -141,7 +148,8 @@
         "Category": "Personal",
         "Year": "2021",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=nissan&filter%5Bmodel_review_slug%5D=leaf-2018&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "6"
+        "Rating": "6",
+        "Mileage": 51516
     },
     {
         "Make": "Volkswagen",
@@ -159,7 +167,8 @@
         "Category": "Personal",
         "Year": "2022",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=volkswagen&filter%5Bmodel_review_slug%5D=golf-2019&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "7"
+        "Rating": "7",
+        "Mileage": 367
     },
     {
         "Make": "Kia",
@@ -177,7 +186,8 @@
         "Category": "Family",
         "Year": "2022",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=kia&filter%5Bmodel_review_slug%5D=sorento-2020&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "8"
+        "Rating": "8",
+        "Mileage": 445
     },
     {
         "Make": "Mazda",
@@ -195,7 +205,8 @@
         "Category": "Personal",
         "Year": "2022",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=mazda&filter%5Bmodel_review_slug%5D=3-2019&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "8"
+        "Rating": "8",
+        "Mileage": 206
     },
     {
         "Make": "Porsche",
@@ -213,7 +224,8 @@
         "Category": "Sport",
         "Year": "2020",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=porsche&filter%5Bmodel_review_slug%5D=911-2019&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "10"
+        "Rating": "10",
+        "Mileage": 92569
     },
     {
         "Make": "Jaguar",
@@ -231,7 +243,8 @@
         "Category": "Personal",
         "Year": "2020",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=jaguar&filter%5Bmodel_review_slug%5D=xf-2020&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "8"
+        "Rating": "8",
+        "Mileage": 165536
     },
     {
         "Make": "Alfa Romeo",
@@ -249,7 +262,8 @@
         "Category": "Personal",
         "Year": "2020",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=alfa-romeo&filter%5Bmodel_review_slug%5D=giulia-quadrifoglio&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "8"
+        "Rating": "8",
+        "Mileage": 242
     },
     {
         "Make": "Maserati",
@@ -267,7 +281,8 @@
         "Category": "Luxury",
         "Year": "2019",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=maserati&filter%5Bmodel_review_slug%5D=Ghibli&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "9"
+        "Rating": "9",
+        "Mileage": 113625
     },
     {
         "Make": "Skoda",
@@ -285,7 +300,8 @@
         "Category": "Family",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=skoda&filter%5Bmodel_review_slug%5D=octavia-2017&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "8"
+        "Rating": "8",
+        "Mileage": 164
     },
     {
         "Make": "Toyota",
@@ -303,7 +319,8 @@
         "Category": "Family",
         "Year": "2019",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=toyota&filter%5Bmodel_review_slug%5D=highlander-2021&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "8"
+        "Rating": "8",
+        "Mileage": 32081
     },
     {
         "Make": "Honda",
@@ -321,7 +338,8 @@
         "Category": "Family",
         "Year": "2018",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=honda&filter%5Bmodel_review_slug%5D=cr-v-2018&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "8"
+        "Rating": "8",
+        "Mileage": 130947
     },
     {
         "Make": "BMW",
@@ -339,7 +357,8 @@
         "Category": "Luxury",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=bmw&filter%5Bmodel_review_slug%5D=3-series-2019&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "9"
+        "Rating": "9",
+        "Mileage": 361
     },
     {
         "Make": "Mercedes-Benz",
@@ -357,7 +376,8 @@
         "Category": "Luxury",
         "Year": "2019",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=mercedes&filter%5Bmodel_review_slug%5D=gle-2019&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "9"
+        "Rating": "9",
+        "Mileage": 111255
     },
     {
         "Make": "Ford",
@@ -375,7 +395,8 @@
         "Category": "Utility",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=ford&filter%5Bmodel_review_slug%5D=focus-estate-2018&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "9"
+        "Rating": "9",
+        "Mileage": 166
     },
     {
         "Make": "Audi",
@@ -393,7 +414,8 @@
         "Category": "Luxury",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=audi&filter%5Bmodel_review_slug%5D=q8&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "9"
+        "Rating": "9",
+        "Mileage": 341
     },
     {
         "Make": "Nissan",
@@ -411,7 +433,8 @@
         "Category": "Family",
         "Year": "2018",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=nissan&filter%5Bmodel_review_slug%5D=qashqai-2017&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "7"
+        "Rating": "7",
+        "Mileage": 186334
     },
     {
         "Make": "Jaguar",
@@ -429,7 +452,8 @@
         "Category": "Luxury",
         "Year": "2019",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=jaguar&filter%5Bmodel_review_slug%5D=xe-2020&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "8"
+        "Rating": "8",
+        "Mileage": 148699
     },
     {
         "Make": "Volkswagen",
@@ -447,7 +471,8 @@
         "Category": "Family",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=volkswagen&filter%5Bmodel_review_slug%5D=tiguan-2024&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "7"
+        "Rating": "7",
+        "Mileage": 190
     },
     {
         "Make": "Renault",
@@ -465,7 +490,8 @@
         "Category": "Compact",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=renault&filter%5Bmodel_review_slug%5D=Clio&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "7"
+        "Rating": "7",
+        "Mileage": 125
     },
     {
         "Make": "Fiat",
@@ -483,7 +509,8 @@
         "Category": "Compact",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=fiat&filter%5Bmodel_review_slug%5D=500&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "8"
+        "Rating": "8",
+        "Mileage": 130
     },
     {
         "Make": "Porsche",
@@ -501,7 +528,8 @@
         "Category": "Luxury",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=porsche&filter%5Bmodel_review_slug%5D=Cayman-Old&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "10"
+        "Rating": "10",
+        "Mileage": 102124
     },
     {
         "Make": "Tesla",
@@ -519,7 +547,8 @@
         "Category": "Electric",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=tesla&filter%5Bmodel_review_slug%5D=model-3-2019&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "7"
+        "Rating": "7",
+        "Mileage": 259
     },
     {
         "Make": "Mazda",
@@ -537,7 +566,8 @@
         "Category": "Family",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=mazda&filter%5Bmodel_review_slug%5D=cx-5-2017&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "8"
+        "Rating": "8",
+        "Mileage": 407
     },
     {
         "Make": "Skoda",
@@ -555,7 +585,8 @@
         "Category": "Family",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=skoda&filter%5Bmodel_review_slug%5D=kodiaq-vrs&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "8"
+        "Rating": "8",
+        "Mileage": 417
     },
     {
         "Make": "Peugeot",
@@ -573,7 +604,8 @@
         "Category": "Family",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=peugeot&filter%5Bmodel_review_slug%5D=3008-2023&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "8"
+        "Rating": "8",
+        "Mileage": 228
     },
     {
         "Make": "Renault",
@@ -591,7 +623,8 @@
         "Category": "Family",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=renault&filter%5Bmodel_review_slug%5D=Kadjar&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150\u00df",
-        "Rating": "8"
+        "Rating": "8",
+        "Mileage": 335
     },
     {
         "Make": "Fiat",
@@ -609,7 +642,8 @@
         "Category": "Compact",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=fiat&filter%5Bmodel_review_slug%5D=Panda-New&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "7"
+        "Rating": "7",
+        "Mileage": 219
     },
     {
         "Make": "SEAT",
@@ -627,7 +661,8 @@
         "Category": "Compact",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=seat&filter%5Bmodel_review_slug%5D=Leon&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "7"
+        "Rating": "7",
+        "Mileage": 267
     },
     {
         "Make": "Citroen",
@@ -645,7 +680,8 @@
         "Category": "Family",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=citroen&filter%5Bmodel_review_slug%5D=c5-aircross-2019&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "8"
+        "Rating": "8",
+        "Mileage": 235
     },
     {
         "Make": "Jaguar",
@@ -663,7 +699,8 @@
         "Category": "Luxury",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=jaguar&filter%5Bmodel_review_slug%5D=f-pace-2020&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "9"
+        "Rating": "9",
+        "Mileage": 40
     },
     {
         "Make": "Porsche",
@@ -681,7 +718,8 @@
         "Category": "Luxury",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=porsche&filter%5Bmodel_review_slug%5D=Cayenne&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "10"
+        "Rating": "10",
+        "Mileage": 6
     },
     {
         "Make": "Audi",
@@ -699,7 +737,8 @@
         "Category": "Family",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=audi&filter%5Bmodel_review_slug%5D=A6-New&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "9"
+        "Rating": "9",
+        "Mileage": 68
     },
     {
         "Make": "BMW",
@@ -717,7 +756,8 @@
         "Category": "Luxury",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=bmw&filter%5Bmodel_review_slug%5D=x7&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "9"
+        "Rating": "9",
+        "Mileage": 490
     },
     {
         "Make": "Mercedes-Benz",
@@ -735,7 +775,8 @@
         "Category": "Luxury",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=mercedes&filter%5Bmodel_review_slug%5D=gls-2019&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "9"
+        "Rating": "9",
+        "Mileage": 431
     },
     {
         "Make": "Volkswagen",
@@ -753,7 +794,8 @@
         "Category": "Family",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=volkswagen&filter%5Bmodel_review_slug%5D=touareg-2018&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "9"
+        "Rating": "9",
+        "Mileage": 146
     },
     {
         "Make": "Jaguar",
@@ -771,7 +813,8 @@
         "Category": "Luxury",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=jaguar&filter%5Bmodel_review_slug%5D=e-pace&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "8"
+        "Rating": "8",
+        "Mileage": 187
     },
     {
         "Make": "Skoda",
@@ -789,7 +832,8 @@
         "Category": "Compact",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=skoda&filter%5Bmodel_review_slug%5D=Fabia&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "7"
+        "Rating": "7",
+        "Mileage": 17
     },
     {
         "Make": "Peugeot",
@@ -807,7 +851,8 @@
         "Category": "Compact",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=peugeot&filter%5Bmodel_review_slug%5D=208-2019&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "7"
+        "Rating": "7",
+        "Mileage": 147
     },
     {
         "Make": "SEAT",
@@ -825,7 +870,8 @@
         "Category": "Compact",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=seat&filter%5Bmodel_review_slug%5D=ibiza-2017&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "7"
+        "Rating": "7",
+        "Mileage": 55
     },
     {
         "Make": "Citroen",
@@ -843,7 +889,8 @@
         "Category": "Compact",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=citroen&filter%5Bmodel_review_slug%5D=c3-2016&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "7"
+        "Rating": "7",
+        "Mileage": 483
     },
     {
         "Make": "Volkswagen",
@@ -861,7 +908,8 @@
         "Category": "Compact",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=volkswagen&filter%5Bmodel_review_slug%5D=polo-2017&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "8"
+        "Rating": "8",
+        "Mileage": 363
     },
     {
         "Make": "Dacia",
@@ -879,7 +927,8 @@
         "Category": "Family",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=dacia&filter%5Bmodel_review_slug%5D=duster-2018&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "7"
+        "Rating": "7",
+        "Mileage": 432
     },
     {
         "Make": "Dacia",
@@ -897,7 +946,8 @@
         "Category": "Compact",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=dacia&filter%5Bmodel_review_slug%5D=sandero-2021&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "7"
+        "Rating": "7",
+        "Mileage": 325
     },
     {
         "Make": "Skoda",
@@ -915,7 +965,8 @@
         "Category": "Compact",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=skoda&filter%5Bmodel_review_slug%5D=scala&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "8"
+        "Rating": "8",
+        "Mileage": 20
     },
     {
         "Make": "Peugeot",
@@ -933,7 +984,8 @@
         "Category": "Compact",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=peugeot&filter%5Bmodel_review_slug%5D=308&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "8"
+        "Rating": "8",
+        "Mileage": 409
     },
     {
         "Make": "Fiat",
@@ -951,7 +1003,8 @@
         "Category": "Compact",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=fiat&filter%5Bmodel_review_slug%5D=tipo&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "7"
+        "Rating": "7",
+        "Mileage": 83
     },
     {
         "Make": "Opel",
@@ -969,7 +1022,8 @@
         "Category": "Compact",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=vauxhall&filter%5Bmodel_review_slug%5D=corsa-2019&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "7"
+        "Rating": "7",
+        "Mileage": 459
     },
     {
         "Make": "Ford",
@@ -987,7 +1041,8 @@
         "Category": "Compact",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=ford&filter%5Bmodel_review_slug%5D=fiesta-2017&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "7"
+        "Rating": "7",
+        "Mileage": 252
     },
     {
         "Make": "Suzuki",
@@ -1005,7 +1060,8 @@
         "Category": "Compact",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=suzuki&filter%5Bmodel_review_slug%5D=swift-2024&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "7"
+        "Rating": "7",
+        "Mileage": 146
     },
     {
         "Make": "Nissan",
@@ -1023,6 +1079,7 @@
         "Category": "Compact",
         "Year": "2023",
         "ImageURL": "https://car-data.carwow.co.uk/image?filter%5Bangle%5D=side&filter%5Bbrand_slug%5D=nissan&filter%5Bmodel_review_slug%5D=micra-2017&zoomType=fullscreen&zoomLevel=0&billingTag=web&width=150",
-        "Rating": "7);"
+        "Rating": "7);",
+        "Mileage": 360
     }
 ]
