@@ -12,9 +12,11 @@ function Home() {
         fuel: '',
         drive: '',
         condition: '',
-        priceRange: [0, 94990], // Default range for Price
-        yearRange: [2010, 2025], // Default range for Year (adjust based on your data)
-        mileageRange: [0, 300000], // Default range for Mileage (adjust based on your data)
+        priceRange: [0, 94990],
+        yearRange: [2010, 2025],
+        mileageRange: [0, 300000],
+        cylinderCapacityRange: [1000, 5000], // Default range for Cylinder Capacity (1000 cm³ to 5000 cm³)
+        horsepowerRange: [50, 500], // Default range for Horsepower (50 hp to 500 hp)
     });
 
     // Function to set initial cars
@@ -62,6 +64,20 @@ function Home() {
                 (car) => parseInt(car.Mileage) >= filters.mileageRange[0] && parseInt(car.Mileage) <= filters.mileageRange[1]
             );
         }
+        if (filters.cylinderCapacityRange[0] > 1000 || filters.cylinderCapacityRange[1] < 5000) {
+            updatedCars = updatedCars.filter(
+                (car) =>
+                    parseInt(car.CylinderCapacity) >= filters.cylinderCapacityRange[0] &&
+                    parseInt(car.CylinderCapacity) <= filters.cylinderCapacityRange[1]
+            );
+        }
+        if (filters.horsepowerRange[0] > 50 || filters.horsepowerRange[1] < 500) {
+            updatedCars = updatedCars.filter(
+                (car) =>
+                    parseInt(car.Horsepower) >= filters.horsepowerRange[0] &&
+                    parseInt(car.Horsepower) <= filters.horsepowerRange[1]
+            );
+        }
 
         setFilteredCars(updatedCars);
     }, [filters, cars]);
@@ -81,7 +97,7 @@ function Home() {
             <div className="lg:w-3/4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
                     {filteredCars.map((car, index) => {
-                        const mileage = car.Mileage; // Use actual mileage from data
+                        const mileage = car.Mileage;
 
                         return (
                             <div key={index} className="bg-white dark:bg-gray-700 rounded-lg shadow-md relative transition-transform transform hover:scale-105 duration-300">
@@ -214,6 +230,52 @@ function Home() {
                         <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400">
                             <span>{filters.mileageRange[0].toLocaleString()} km</span>
                             <span>{filters.mileageRange[1].toLocaleString()} km</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label className="text-textLight dark:text-textDark">Cylinder Capacity</label>
+                        <input
+                            type="range"
+                            min="1000"
+                            max="5000"
+                            value={filters.cylinderCapacityRange[0]}
+                            onChange={(e) => setFilters({ ...filters, cylinderCapacityRange: [parseInt(e.target.value), filters.cylinderCapacityRange[1]] })}
+                            className="w-full mt-1"
+                        />
+                        <input
+                            type="range"
+                            min="1000"
+                            max="5000"
+                            value={filters.cylinderCapacityRange[1]}
+                            onChange={(e) => setFilters({ ...filters, cylinderCapacityRange: [filters.cylinderCapacityRange[0], parseInt(e.target.value)] })}
+                            className="w-full mt-1"
+                        />
+                        <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400">
+                            <span>{filters.cylinderCapacityRange[0].toLocaleString()} cm³</span>
+                            <span>{filters.cylinderCapacityRange[1].toLocaleString()} cm³</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label className="text-textLight dark:text-textDark">Horsepower</label>
+                        <input
+                            type="range"
+                            min="50"
+                            max="500"
+                            value={filters.horsepowerRange[0]}
+                            onChange={(e) => setFilters({ ...filters, horsepowerRange: [parseInt(e.target.value), filters.horsepowerRange[1]] })}
+                            className="w-full mt-1"
+                        />
+                        <input
+                            type="range"
+                            min="50"
+                            max="500"
+                            value={filters.horsepowerRange[1]}
+                            onChange={(e) => setFilters({ ...filters, horsepowerRange: [filters.horsepowerRange[0], parseInt(e.target.value)] })}
+                            className="w-full mt-1"
+                        />
+                        <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400">
+                            <span>{filters.horsepowerRange[0]} hp</span>
+                            <span>{filters.horsepowerRange[1]} hp</span>
                         </div>
                     </div>
                     <select
