@@ -33,7 +33,7 @@ function Home() {
             updatedCars = updatedCars.filter((car) => car.Transmission === filters.transmission);
         }
         if (filters.bodyType) {
-            updatedCars = updatedCars.filter((car) => car.Type === filters.bodyType); 
+            updatedCars = updatedCars.filter((car) => car.Type === filters.bodyType);
         }
         if (filters.fuel) {
             updatedCars = updatedCars.filter((car) => car.Fuel === filters.fuel);
@@ -54,7 +54,7 @@ function Home() {
     const uniqueMakes = [...new Set(carsData.map((car) => car.Make))];
     const uniqueModels = [...new Set(carsData.map((car) => car.Model))];
     const uniqueTransmissions = [...new Set(carsData.map((car) => car.Transmission))];
-    const uniqueBodyTypes = [...new Set(carsData.map((car) => car.Type))]; 
+    const uniqueBodyTypes = [...new Set(carsData.map((car) => car.Type))];
     const uniqueFuels = [...new Set(carsData.map((car) => car.Fuel))];
     const uniqueDrives = [...new Set(carsData.map((car) => car.Drive))];
 
@@ -100,7 +100,100 @@ function Home() {
                         );
                     })}
                 </div>
-            </div>    
+            </div>
+            {/* Filter Sidebar */}
+            <div className="lg:w-1/4">
+                <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-md space-y-4">
+                    <h2 className="text-lg font-semibold text-textLight dark:text-textDark">Filtre</h2>
+                    <select
+                        value={filters.make}
+                        onChange={(e) => setFilters({ ...filters, make: e.target.value })}
+                        className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
+                    >
+                        <option value="">Make</option>
+                        {uniqueMakes.map((make) => (
+                            <option key={make} value={make}>
+                                {make}
+                            </option>
+                        ))}
+                    </select>
+                    <select
+                        value={filters.model}
+                        onChange={(e) => setFilters({ ...filters, model: e.target.value })}
+                        className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
+                    >
+                        <option value="">Model</option>
+                        {uniqueModels.map((model) => (
+                            <option key={model} value={model}>
+                                {model}
+                            </option>
+                        ))}
+                    </select>
+                    <div>
+                        <label className="text-textLight dark:text-textDark">Price</label>
+                        <input
+                            type="range"
+                            min="0"
+                            max="94990"
+                            value={filters.priceRange[1]}
+                            onChange={(e) => setFilters({ ...filters, priceRange: [filters.priceRange[0], parseInt(e.target.value)] })}
+                            className="w-full mt-1"
+                        />
+                        <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400">
+                            <span>{filters.priceRange[0].toLocaleString()} €</span>
+                            <span>{filters.priceRange[1].toLocaleString()} €</span>
+                        </div>
+                    </div>
+                    <select
+                        value={filters.transmission}
+                        onChange={(e) => setFilters({ ...filters, transmission: e.target.value })}
+                        className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
+                    >
+                        <option value="">Transmission</option>
+                        {uniqueTransmissions.map((transmission) => (
+                            <option key={transmission} value={transmission}>
+                                {transmission}
+                            </option>
+                        ))}
+                    </select>
+                    <select
+                        value={filters.bodyType}
+                        onChange={(e) => setFilters({ ...filters, bodyType: e.target.value })}
+                        className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
+                    >
+                        <option value="">Body Type</option>
+                        {uniqueBodyTypes.map((bodyType) => (
+                            <option key={bodyType} value={bodyType}>
+                                {bodyType}
+                            </option>
+                        ))}
+                    </select>
+                    <select
+                        value={filters.fuel}
+                        onChange={(e) => setFilters({ ...filters, fuel: e.target.value })}
+                        className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
+                    >
+                        <option value="">Fuel</option>
+                        {uniqueFuels.map((fuel) => (
+                            <option key={fuel} value={fuel}>
+                                {fuel}
+                            </option>
+                        ))}
+                    </select>
+                    <select
+                        value={filters.drive}
+                        onChange={(e) => setFilters({ ...filters, drive: e.target.value })}
+                        className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
+                    >
+                        <option value="">Drive</option>
+                        {uniqueDrives.map((drive) => (
+                            <option key={drive} value={drive}>
+                                {drive}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+            </div>
         </div>
     );
 }
