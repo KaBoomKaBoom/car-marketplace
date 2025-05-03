@@ -4,12 +4,9 @@ import carsData from './cars.json'; // Adjust the path if necessary
 function Home() {
     const [cars, setCars] = useState([]);
 
-    // Function to randomly select 12 cars from the dataset
+    // Function to rselect cars from dataset
     useEffect(() => {
-        const numberOfCarsToShow = 12
-        const shuffledCars = [...carsData].sort(() => Math.random() - 0.5);
-        const selectedCars = shuffledCars.slice(0, numberOfCarsToShow);
-        setCars(selectedCars);
+        setCars([...carsData]);
     }, []);
 
     return (
