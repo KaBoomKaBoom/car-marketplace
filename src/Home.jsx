@@ -141,7 +141,7 @@ function Home() {
                     <h2 className="text-lg font-semibold text-textLight dark:text-textDark">Filters</h2>
                     <select
                         value={filters.make}
-                        onChange={(e) => setFilters({ ...filters, make: e.target.value })}
+                        onChange={(e) => setFilters({ ...filters, make: e.target.value, model: '' })} // Reset model when make changes
                         className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
                     >
                         <option value="">Make</option>
@@ -155,6 +155,7 @@ function Home() {
                         value={filters.model}
                         onChange={(e) => setFilters({ ...filters, model: e.target.value })}
                         className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
+                        disabled={!filters.make} // Disable when make is not selected
                     >
                         <option value="">Model</option>
                         {uniqueModels.map((model) => (
