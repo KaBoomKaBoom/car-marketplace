@@ -15,8 +15,8 @@ function Home() {
         priceRange: [0, 94990],
         yearRange: [2010, 2025],
         mileageRange: [0, 300000],
-        cylinderCapacityRange: [1000, 5000], // Default range for Cylinder Capacity (1000 cm³ to 5000 cm³)
-        horsepowerRange: [50, 500], // Default range for Horsepower (50 hp to 500 hp)
+        cylinderCapacityRange: [1000, 5000],
+        horsepowerRange: [50, 500],
     });
 
     // Function to set initial cars
@@ -181,7 +181,25 @@ function Home() {
                             onChange={(e) => setFilters({ ...filters, priceRange: [filters.priceRange[0], parseInt(e.target.value)] })}
                             className="w-full mt-1"
                         />
-                        <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400">
+                        <div className="flex justify-between space-x-2 mt-2">
+                            <input
+                                type="number"
+                                value={filters.priceRange[0]}
+                                onChange={(e) => setFilters({ ...filters, priceRange: [parseInt(e.target.value) || 0, filters.priceRange[1]] })}
+                                min="0"
+                                max={filters.priceRange[1]}
+                                className="w-1/2 p-1 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
+                            />
+                            <input
+                                type="number"
+                                value={filters.priceRange[1]}
+                                onChange={(e) => setFilters({ ...filters, priceRange: [filters.priceRange[0], parseInt(e.target.value) || 94990] })}
+                                min={filters.priceRange[0]}
+                                max="94990"
+                                className="w-1/2 p-1 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
+                            />
+                        </div>
+                        <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mt-1">
                             <span>{filters.priceRange[0].toLocaleString()} €</span>
                             <span>{filters.priceRange[1].toLocaleString()} €</span>
                         </div>
@@ -204,7 +222,25 @@ function Home() {
                             onChange={(e) => setFilters({ ...filters, yearRange: [filters.yearRange[0], parseInt(e.target.value)] })}
                             className="w-full mt-1"
                         />
-                        <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400">
+                        <div className="flex justify-between space-x-2 mt-2">
+                            <input
+                                type="number"
+                                value={filters.yearRange[0]}
+                                onChange={(e) => setFilters({ ...filters, yearRange: [parseInt(e.target.value) || 2010, filters.yearRange[1]] })}
+                                min="2010"
+                                max={filters.yearRange[1]}
+                                className="w-1/2 p-1 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
+                            />
+                            <input
+                                type="number"
+                                value={filters.yearRange[1]}
+                                onChange={(e) => setFilters({ ...filters, yearRange: [filters.yearRange[0], parseInt(e.target.value) || 2025] })}
+                                min={filters.yearRange[0]}
+                                max="2025"
+                                className="w-1/2 p-1 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
+                            />
+                        </div>
+                        <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mt-1">
                             <span>{filters.yearRange[0]}</span>
                             <span>{filters.yearRange[1]}</span>
                         </div>
@@ -227,7 +263,25 @@ function Home() {
                             onChange={(e) => setFilters({ ...filters, mileageRange: [filters.mileageRange[0], parseInt(e.target.value)] })}
                             className="w-full mt-1"
                         />
-                        <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400">
+                        <div className="flex justify-between space-x-2 mt-2">
+                            <input
+                                type="number"
+                                value={filters.mileageRange[0]}
+                                onChange={(e) => setFilters({ ...filters, mileageRange: [parseInt(e.target.value) || 0, filters.mileageRange[1]] })}
+                                min="0"
+                                max={filters.mileageRange[1]}
+                                className="w-1/2 p-1 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
+                            />
+                            <input
+                                type="number"
+                                value={filters.mileageRange[1]}
+                                onChange={(e) => setFilters({ ...filters, mileageRange: [filters.mileageRange[0], parseInt(e.target.value) || 300000] })}
+                                min={filters.mileageRange[0]}
+                                max="300000"
+                                className="w-1/2 p-1 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
+                            />
+                        </div>
+                        <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mt-1">
                             <span>{filters.mileageRange[0].toLocaleString()} km</span>
                             <span>{filters.mileageRange[1].toLocaleString()} km</span>
                         </div>
@@ -250,7 +304,25 @@ function Home() {
                             onChange={(e) => setFilters({ ...filters, cylinderCapacityRange: [filters.cylinderCapacityRange[0], parseInt(e.target.value)] })}
                             className="w-full mt-1"
                         />
-                        <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400">
+                        <div className="flex justify-between space-x-2 mt-2">
+                            <input
+                                type="number"
+                                value={filters.cylinderCapacityRange[0]}
+                                onChange={(e) => setFilters({ ...filters, cylinderCapacityRange: [parseInt(e.target.value) || 1000, filters.cylinderCapacityRange[1]] })}
+                                min="1000"
+                                max={filters.cylinderCapacityRange[1]}
+                                className="w-1/2 p-1 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
+                            />
+                            <input
+                                type="number"
+                                value={filters.cylinderCapacityRange[1]}
+                                onChange={(e) => setFilters({ ...filters, cylinderCapacityRange: [filters.cylinderCapacityRange[0], parseInt(e.target.value) || 5000] })}
+                                min={filters.cylinderCapacityRange[0]}
+                                max="5000"
+                                className="w-1/2 p-1 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
+                            />
+                        </div>
+                        <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mt-1">
                             <span>{filters.cylinderCapacityRange[0].toLocaleString()} cm³</span>
                             <span>{filters.cylinderCapacityRange[1].toLocaleString()} cm³</span>
                         </div>
@@ -273,7 +345,25 @@ function Home() {
                             onChange={(e) => setFilters({ ...filters, horsepowerRange: [filters.horsepowerRange[0], parseInt(e.target.value)] })}
                             className="w-full mt-1"
                         />
-                        <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400">
+                        <div className="flex justify-between space-x-2 mt-2">
+                            <input
+                                type="number"
+                                value={filters.horsepowerRange[0]}
+                                onChange={(e) => setFilters({ ...filters, horsepowerRange: [parseInt(e.target.value) || 50, filters.horsepowerRange[1]] })}
+                                min="50"
+                                max={filters.horsepowerRange[1]}
+                                className="w-1/2 p-1 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
+                            />
+                            <input
+                                type="number"
+                                value={filters.horsepowerRange[1]}
+                                onChange={(e) => setFilters({ ...filters, horsepowerRange: [filters.horsepowerRange[0], parseInt(e.target.value) || 500] })}
+                                min={filters.horsepowerRange[0]}
+                                max="500"
+                                className="w-1/2 p-1 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
+                            />
+                        </div>
+                        <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mt-1">
                             <span>{filters.horsepowerRange[0]} hp</span>
                             <span>{filters.horsepowerRange[1]} hp</span>
                         </div>
