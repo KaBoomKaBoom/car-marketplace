@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
+import Home from './Home.jsx';
 
 function App() {
   const [theme, setTheme] = useState(() => {
@@ -25,7 +26,7 @@ function App() {
       <nav className="bg-primary p-4 shadow-md dark:bg-gray-800">
         <div className="container mx-auto flex justify-between items-center">
           <Link to="/" className="text-white text-2xl font-bold">
-            Mașinica Mea
+            Car Marketplace
           </Link>
           <div className="space-x-4 flex items-center">
             <Link to="/" className="text-white hover:text-accent dark:hover:text-accent">
@@ -45,7 +46,7 @@ function App() {
       </nav>
       <div className="container mx-auto p-4">
         <Routes>
-          <Route path="/" element={<div className="bg-white dark:bg-gray-700 text-textLight dark:text-textDark p-6 rounded-lg shadow-md">Home Page (TBD)</div>} />
+          <Route path="/" element={<Home />} />
           <Route path="/add" element={<div className="bg-white dark:bg-gray-700 text-textLight dark:text-textDark p-6 rounded-lg shadow-md">Add Car Page (TBD)</div>} />
         </Routes>
       </div>
