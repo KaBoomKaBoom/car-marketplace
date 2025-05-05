@@ -19,17 +19,19 @@ function Offers() {
         horsepowerRange: [50, 500],
     });
     const [currentPage, setCurrentPage] = useState(1);
-    const carsPerPage = 15;
+    const [searchTerm, setSearchTerm] = useState(''); // Add search term state
+    const carsPerPage = 20;
 
     // Function to set initial cars
     useEffect(() => {
         setCars([...carsData]);
     }, []);
 
-    // Update filtered cars based on filters
+    // Update filtered cars based on filters and search term
     useEffect(() => {
         let updatedCars = [...cars];
 
+        // Apply existing filters
         if (filters.make) {
             updatedCars = updatedCars.filter((car) => car.Make === filters.make);
         }
@@ -81,9 +83,18 @@ function Offers() {
             );
         }
 
+        // Apply search term filter on Make and Model
+        if (searchTerm) {
+            updatedCars = updatedCars.filter(
+                (car) =>
+                    car.Make.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    car.Model.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+        }
+
         setFilteredCars(updatedCars);
-        setCurrentPage(1); // Reset to first page when filters change
-    }, [filters, cars]);
+        setCurrentPage(1); // Reset to first page when filters or search term change
+    }, [filters, cars, searchTerm]);
 
     // Extract unique values for dropdowns
     const uniqueMakes = [...new Set(carsData.map((car) => car.Make))];
@@ -108,6 +119,16 @@ function Offers() {
         <div className="flex flex-col lg:flex-row space-y-6 lg:space-y-0 lg:space-x-6 p-4">
             {/* Car Showcase */}
             <div className="lg:w-3/4">
+                {/* Search Bar */}
+                <div className="mb-4">
+                    <input
+                        type="text"
+                        placeholder="Search by Make or Model..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
+                    />
+                </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
                     {currentCars.map((car, index) => {
                         const mileage = car.Mileage;
