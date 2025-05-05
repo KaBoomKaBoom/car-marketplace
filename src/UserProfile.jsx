@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import carsData from './cars.json'; // Adjust the path if necessary
 
 function UserProfile() {
   // Mock user data (replace with real data from backend or localStorage)
@@ -9,11 +10,21 @@ function UserProfile() {
     notifications: true,
   });
 
-  // Mock saved cars (replace with real data)
-  const [savedCars, setSavedCars] = useState([
-    { id: 1, make: 'Toyota', model: 'Camry', year: 2020, price: 25000 },
-    { id: 2, make: 'Honda', model: 'Civic', year: 2019, price: 22000 },
-  ]);
+  // State for liked cars (indices from localStorage)
+  const [likedCars, setLikedCars] = useState([]);
+
+  // Load liked cars from localStorage on mount
+  useEffect(() => {
+    const storedLikedCars = localStorage.getItem('likedCars');
+    if (storedLikedCars) {
+      setLikedCars(JSON.parse(storedLikedCars));
+    }
+  }, []);
+
+  // Update localStorage whenever likedCars changes
+  useEffect(() => {
+    localStorage.setItem('likedCars', JSON.stringify(likedCars));
+  }, [likedCars]);
 
   // State for editing user details
   const [isEditing, setIsEditing] = useState(false);
@@ -97,9 +108,22 @@ function UserProfile() {
       // In a real app, clear auth tokens, session, etc.
       alert('Signed out successfully.');
       // Redirect to login or home page (e.g., using React Router's useNavigate)
-      // For now, we'll just show an alert
     }
   };
+
+  // Remove a liked car
+  const handleRemoveCar = (carIndex) => {
+    setLikedCars(likedCars.filter((index) => index !== carIndex));
+  };
+
+  // Map liked car indices to actual car data
+  const savedCars = likedCars.map((index) => ({
+    id: index,
+    make: carsData[index].Make,
+    model: carsData[index].Model,
+    year: carsData[index].Year,
+    price: parseInt(carsData[index].Price),
+  }));
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-textLight dark:text-textDark p-4">
@@ -290,7 +314,7 @@ function UserProfile() {
                     </p>
                   </div>
                   <button
-                    onClick={() => setSavedCars(savedCars.filter((c) => c.id !== car.id))}
+                    onClick={() => handleRemoveCar(car.id)}
                     className="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300"
                   >
                     Remove
