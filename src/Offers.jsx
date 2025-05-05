@@ -19,7 +19,8 @@ function Offers() {
         horsepowerRange: [50, 500],
     });
     const [currentPage, setCurrentPage] = useState(1);
-    const [searchTerm, setSearchTerm] = useState(''); // Add search term state
+    const [searchTerm, setSearchTerm] = useState('');
+    const [likedCars, setLikedCars] = useState([]); // State for liked cars
     const carsPerPage = 20;
 
     // Function to set initial cars
@@ -31,7 +32,6 @@ function Offers() {
     useEffect(() => {
         let updatedCars = [...cars];
 
-        // Apply existing filters
         if (filters.make) {
             updatedCars = updatedCars.filter((car) => car.Make === filters.make);
         }
@@ -83,7 +83,6 @@ function Offers() {
             );
         }
 
-        // Apply search term filter on Make and Model
         if (searchTerm) {
             updatedCars = updatedCars.filter(
                 (car) =>
@@ -93,8 +92,17 @@ function Offers() {
         }
 
         setFilteredCars(updatedCars);
-        setCurrentPage(1); // Reset to first page when filters or search term change
+        setCurrentPage(1);
     }, [filters, cars, searchTerm]);
+
+    // Toggle like/unlike for a car
+    const toggleLike = (carIndex) => {
+        if (likedCars.includes(carIndex)) {
+            setLikedCars(likedCars.filter((index) => index !== carIndex));
+        } else {
+            setLikedCars([...likedCars, carIndex]);
+        }
+    };
 
     // Extract unique values for dropdowns
     const uniqueMakes = [...new Set(carsData.map((car) => car.Make))];
@@ -131,13 +139,37 @@ function Offers() {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
                     {currentCars.map((car, index) => {
+                        const globalIndex = carsData.indexOf(car); // Get the car's index in the original dataset
                         const mileage = car.Mileage;
+                        const isLiked = likedCars.includes(globalIndex);
 
                         return (
                             <div key={index} className="bg-white dark:bg-gray-700 rounded-lg shadow-md relative transition-transform transform hover:scale-105 duration-300">
                                 <img src={car.ImageURL} alt={`${car.Make} ${car.Model}`} className="w-full h-40 object-cover rounded-t-lg" />
                                 <div className="p-4">
-                                    <h3 className="text-lg font-semibold text-textLight dark:text-textDark">{car.Make} {car.Model}</h3>
+                                    <div className="flex justify-between items-center">
+                                        <h3 className="text-lg font-semibold text-textLight dark:text-textDark">{car.Make} {car.Model}</h3>
+                                        <button
+                                            onClick={() => toggleLike(globalIndex)}
+                                            className="focus:outline-none"
+                                            aria-label={isLiked ? 'Unlike car' : 'Like car'}
+                                        >
+                                            <svg
+                                                className={`w-6 h-6 ${isLiked ? 'text-red-500' : 'text-gray-400'}`}
+                                                fill={isLiked ? 'currentColor' : 'none'}
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth="2"
+                                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                                                />
+                                            </svg>
+                                        </button>
+                                    </div>
                                     <p className="text-gray-600 dark:text-gray-400 text-sm">{car.Year} | {mileage} Km</p>
                                     <div className="flex items-center space-x-2 mt-2 text-gray-600 dark:text-gray-400 text-sm">
                                         <span className="flex items-center">
