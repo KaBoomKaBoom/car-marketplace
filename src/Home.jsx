@@ -18,6 +18,8 @@ function Home() {
         cylinderCapacityRange: [1000, 5000],
         horsepowerRange: [50, 500],
     });
+    const [currentPage, setCurrentPage] = useState(1);
+    const carsPerPage = 15;
 
     // Function to set initial cars
     useEffect(() => {
@@ -80,6 +82,7 @@ function Home() {
         }
 
         setFilteredCars(updatedCars);
+        setCurrentPage(1); // Reset to first page when filters change
     }, [filters, cars]);
 
     // Extract unique values for dropdowns
@@ -91,12 +94,22 @@ function Home() {
     const uniqueDrives = [...new Set(carsData.map((car) => car.Drive))];
     const uniqueConditions = [...new Set(carsData.map((car) => car.Condition))];
 
+    // Pagination logic
+    const indexOfLastCar = currentPage * carsPerPage;
+    const indexOfFirstCar = indexOfLastCar - carsPerPage;
+    const currentCars = filteredCars.slice(indexOfFirstCar, indexOfLastCar);
+    const totalPages = Math.ceil(filteredCars.length / carsPerPage);
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    const nextPage = () => setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+    const prevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
+
     return (
         <div className="flex flex-col lg:flex-row space-y-6 lg:space-y-0 lg:space-x-6 p-4">
             {/* Car Showcase */}
             <div className="lg:w-3/4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
-                    {filteredCars.map((car, index) => {
+                    {currentCars.map((car, index) => {
                         const mileage = car.Mileage;
 
                         return (
@@ -133,6 +146,32 @@ function Home() {
                         );
                     })}
                 </div>
+                {/* Pagination Controls */}
+                <div className="mt-4 flex justify-center space-x-2">
+                    <button
+                        onClick={prevPage}
+                        disabled={currentPage === 1}
+                        className="px-4 py-2 bg-gray-300 dark:bg-gray-600 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        Previous
+                    </button>
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
+                        <button
+                            key={number}
+                            onClick={() => paginate(number)}
+                            className={`px-4 py-2 rounded-lg ${currentPage === number ? 'bg-primary text-white' : 'bg-gray-300 dark:bg-gray-600'}`}
+                        >
+                            {number}
+                        </button>
+                    ))}
+                    <button
+                        onClick={nextPage}
+                        disabled={currentPage === totalPages}
+                        className="px-4 py-2 bg-gray-300 dark:bg-gray-600 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        Next
+                    </button>
+                </div>
             </div>
 
             {/* Filter Sidebar */}
@@ -141,7 +180,7 @@ function Home() {
                     <h2 className="text-lg font-semibold text-textLight dark:text-textDark">Filters</h2>
                     <select
                         value={filters.make}
-                        onChange={(e) => setFilters({ ...filters, make: e.target.value, model: '' })} // Reset model when make changes
+                        onChange={(e) => setFilters({ ...filters, make: e.target.value, model: '' })}
                         className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
                     >
                         <option value="">Make</option>
@@ -155,7 +194,7 @@ function Home() {
                         value={filters.model}
                         onChange={(e) => setFilters({ ...filters, model: e.target.value })}
                         className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
-                        disabled={!filters.make} // Disable when make is not selected
+                        disabled={!filters.make}
                     >
                         <option value="">Model</option>
                         {uniqueModels.map((model) => (
