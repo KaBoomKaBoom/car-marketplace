@@ -62,7 +62,21 @@ function UserProfile() {
     setErrorMessage('');
   };
 
-
+  // Update password
+  const handlePasswordUpdate = () => {
+    if (passwordData.newPassword !== passwordData.confirmPassword) {
+      setErrorMessage('New password and confirmation do not match.');
+      return;
+    }
+    if (passwordData.newPassword.length < 8) {
+      setErrorMessage('New password must be at least 8 characters long.');
+      return;
+    }
+    // In a real app, verify currentPassword and update password in backend
+    setSuccessMessage('Password updated successfully!');
+    setErrorMessage('');
+    setPasswordData({ currentPassword: '', newPassword: '', confirmPassword: '' });
+  };
 
 
 
@@ -180,6 +194,58 @@ function UserProfile() {
                 <span>Receive email notifications</span>
               </label>
             </div>
+          </div>
+        </section>
+
+        {/* Password Update Section */}
+        <section className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
+          <h2 className="text-2xl font-semibold mb-4">Update Password</h2>
+          <div className="space-y-4">
+            <div>
+              <label htmlFor="currentPassword" className="block text-sm font-medium">
+                Current Password
+              </label>
+              <input
+                type="password"
+                id="currentPassword"
+                name="currentPassword"
+                value={passwordData.currentPassword}
+                onChange={handlePasswordChange}
+                className="w-full p-2 mt-1 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
+              />
+            </div>
+            <div>
+              <label htmlFor="newPassword" className="block text-sm font-medium">
+                New Password
+              </label>
+              <input
+                type="password"
+                id="newPassword"
+                name="newPassword"
+                value={passwordData.newPassword}
+                onChange={handlePasswordChange}
+                className="w-full p-2 mt-1 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
+              />
+            </div>
+            <div>
+              <label htmlFor="confirmPassword" className="block text-sm font-medium">
+                Confirm New Password
+              </label>
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                value={passwordData.confirmPassword}
+                onChange={handlePasswordChange}
+                className="w-full p-2 mt-1 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
+              />
+            </div>
+            <button
+              onClick={handlePasswordUpdate}
+              className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark"
+            >
+              Update Password
+            </button>
           </div>
         </section>
 
