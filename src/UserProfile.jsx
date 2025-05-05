@@ -1,7 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useContext } from 'react';
+import { LikedCarsContext } from './LikedCarsContext';
 import carsData from './cars.json'; // Adjust the path if necessary
 
 function UserProfile() {
+  const { likedCars, removeLikedCar } = useContext(LikedCarsContext);
+
   // Mock user data (replace with real data from backend or localStorage)
   const [user, setUser] = useState({
     name: 'John Doe',
@@ -9,22 +12,6 @@ function UserProfile() {
     phone: '+373 999 999 999',
     notifications: true,
   });
-
-  // State for liked cars (indices from localStorage)
-  const [likedCars, setLikedCars] = useState([]);
-
-  // Load liked cars from localStorage on mount
-  useEffect(() => {
-    const storedLikedCars = localStorage.getItem('likedCars');
-    if (storedLikedCars) {
-      setLikedCars(JSON.parse(storedLikedCars));
-    }
-  }, []);
-
-  // Update localStorage whenever likedCars changes
-  useEffect(() => {
-    localStorage.setItem('likedCars', JSON.stringify(likedCars));
-  }, [likedCars]);
 
   // State for editing user details
   const [isEditing, setIsEditing] = useState(false);
@@ -109,11 +96,6 @@ function UserProfile() {
       alert('Signed out successfully.');
       // Redirect to login or home page (e.g., using React Router's useNavigate)
     }
-  };
-
-  // Remove a liked car
-  const handleRemoveCar = (carIndex) => {
-    setLikedCars(likedCars.filter((index) => index !== carIndex));
   };
 
   // Map liked car indices to actual car data
@@ -314,7 +296,7 @@ function UserProfile() {
                     </p>
                   </div>
                   <button
-                    onClick={() => handleRemoveCar(car.id)}
+                    onClick={() => removeLikedCar(car.id)}
                     className="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300"
                   >
                     Remove
