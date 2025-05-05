@@ -91,6 +91,16 @@ function UserProfile() {
     }
   };
 
+  // Sign out (mock action)
+  const handleSignOut = () => {
+    if (window.confirm('Are you sure you want to sign out?')) {
+      // In a real app, clear auth tokens, session, etc.
+      alert('Signed out successfully.');
+      // Redirect to login or home page (e.g., using React Router's useNavigate)
+      // For now, we'll just show an alert
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-textLight dark:text-textDark p-4">
       <div className="max-w-4xl mx-auto">
@@ -293,20 +303,28 @@ function UserProfile() {
           )}
         </section>
 
-        {/* Delete Account Section */}
+        {/* Danger Zone Section */}
         <section className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
           <h2 className="text-2xl font-semibold mb-4 text-red-600 dark:text-red-400">
             Danger Zone
           </h2>
           <p className="mb-4">
-            Deleting your account is permanent and cannot be undone. All your data will be removed.
+            Manage critical account actions below.
           </p>
-          <button
-            onClick={handleDeleteAccount}
-            className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
-          >
-            Delete Account
-          </button>
+          <div className="flex space-x-4">
+            <button
+              onClick={handleSignOut}
+              className="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700"
+            >
+              Sign Out
+            </button>
+            <button
+              onClick={handleDeleteAccount}
+              className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+            >
+              Delete Account
+            </button>
+          </div>
         </section>
       </div>
     </div>
