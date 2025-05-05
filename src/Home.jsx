@@ -13,13 +13,12 @@ function Home() {
     // Shuffle and select 5 random cars for New Offers
     const shuffledNew = [...carsData].sort(() => 0.5 - Math.random()).slice(0, 5);
     setNewOffers(shuffledNew);
-
   }, []);
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900 text-textLight dark:text-textDark">
       {/* Top Offers Section */}
-      <section className="py-8 px-4  bg-gray-200 dark:bg-gray-800">
+      <section className="py-8 px-4 bg-gray-200 dark:bg-gray-800 rounded-lg shadow-md m-4">
         <h2 className="text-2xl font-bold mb-4">Top Offers</h2>
         <div className="flex overflow-x-auto space-x-4 pb-4 scrollbar-hide">
           {topOffers.map((car, index) => (
@@ -39,7 +38,7 @@ function Home() {
       </section>
 
       {/* New Offers Section */}
-      <section className="py-8 px-4 bg-gray-200 dark:bg-gray-800">
+      <section className="py-8 px-4 bg-gray-200 dark:bg-gray-800 rounded-lg shadow-md m-4">
         <h2 className="text-2xl font-bold mb-4">New Offers</h2>
         <div className="flex space-x-4">
           {newOffers.map((car, index) => (
@@ -57,9 +56,10 @@ function Home() {
           ))}
         </div>
       </section>
+
       {/* Footer Section */}
-      <footer className="mt-auto py-4  text-center  ">
-        <div className="flex justify-around flex-wrap ">
+      <footer className="mt-auto py-4 bg-black text-white text-center rounded-lg shadow-md m-4">
+        <div className="flex justify-around flex-wrap">
           <div>
             <h3 className="text-xl font-bold">Masinica Mea</h3>
             <p>MUN. CHISINAU</p>
