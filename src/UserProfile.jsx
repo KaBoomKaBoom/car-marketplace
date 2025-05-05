@@ -82,7 +82,14 @@ function UserProfile() {
     setPasswordData({ currentPassword: '', newPassword: '', confirmPassword: '' });
   };
 
-
+  // Delete account (mock action)
+  const handleDeleteAccount = () => {
+    if (window.confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+      // In a real app, delete account from backend
+      alert('Account deleted successfully.');
+      // Redirect to login or home page
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-textLight dark:text-textDark p-4">
@@ -286,7 +293,21 @@ function UserProfile() {
           )}
         </section>
 
-    
+        {/* Delete Account Section */}
+        <section className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+          <h2 className="text-2xl font-semibold mb-4 text-red-600 dark:text-red-400">
+            Danger Zone
+          </h2>
+          <p className="mb-4">
+            Deleting your account is permanent and cannot be undone. All your data will be removed.
+          </p>
+          <button
+            onClick={handleDeleteAccount}
+            className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+          >
+            Delete Account
+          </button>
+        </section>
       </div>
     </div>
   );
