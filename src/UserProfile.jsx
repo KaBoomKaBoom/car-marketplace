@@ -107,6 +107,12 @@ function UserProfile() {
     }
   };
 
+  // Remove an added car
+  const handleRemoveAddedCar = (index) => {
+    const updatedCars = addedCars.filter((_, i) => i !== index);
+    localStorage.setItem('carsData', JSON.stringify(updatedCars));
+    setAddedCars(updatedCars);
+  };
 
   // Map liked car indices to actual car data
   const savedCars = likedCars.map((index) => ({
