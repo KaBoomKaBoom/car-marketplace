@@ -9,7 +9,11 @@ function UserProfile() {
     notifications: true,
   });
 
-
+  // Mock saved cars (replace with real data)
+  const [savedCars, setSavedCars] = useState([
+    { id: 1, make: 'Toyota', model: 'Camry', year: 2020, price: 25000 },
+    { id: 2, make: 'Honda', model: 'Civic', year: 2019, price: 22000 },
+  ]);
 
   // State for editing user details
   const [isEditing, setIsEditing] = useState(false);
@@ -249,6 +253,40 @@ function UserProfile() {
           </div>
         </section>
 
+        {/* Saved Cars Section */}
+        <section className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
+          <h2 className="text-2xl font-semibold mb-4">Saved Cars</h2>
+          {savedCars.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {savedCars.map((car) => (
+                <div
+                  key={car.id}
+                  className="bg-gray-50 dark:bg-gray-700 rounded-lg shadow-md p-4 flex justify-between items-center"
+                >
+                  <div>
+                    <h3 className="text-lg font-semibold">
+                      {car.make} {car.model}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm">{car.year}</p>
+                    <p className="text-gray-800 dark:text-gray-200 font-bold">
+                      {car.price.toLocaleString()} €
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => setSavedCars(savedCars.filter((c) => c.id !== car.id))}
+                    className="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300"
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p>No saved cars yet.</p>
+          )}
+        </section>
+
+    
       </div>
     </div>
   );
