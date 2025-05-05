@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import carsData from './cars.json'; // Adjust the path if necessary
 
-function Home() {
+function Offers() {
     const [cars, setCars] = useState([]);
     const [filteredCars, setFilteredCars] = useState([]);
     const [filters, setFilters] = useState({
@@ -474,4 +474,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default Offers;
