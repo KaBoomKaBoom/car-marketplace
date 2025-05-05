@@ -28,6 +28,32 @@ function AddCar() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Basic validation
+    if (!formData.Make || !formData.Model || !formData.Year || !formData.Price) {
+      setErrorMessage('Make, Model, Year, and Price are required.');
+      return;
+    }
+    if (isNaN(formData.Year) || formData.Year < 2010 || formData.Year > 2025) {
+      setErrorMessage('Year must be between 2010 and 2025.');
+      return;
+    }
+    if (isNaN(formData.Price) || formData.Price < 0 || formData.Price > 94990) {
+      setErrorMessage('Price must be between 0 and 94,990 €.');
+      return;
+    }
+    if (isNaN(formData.Mileage) || formData.Mileage < 0 || formData.Mileage > 300000) {
+      setErrorMessage('Mileage must be between 0 and 300,000 km.');
+      return;
+    }
+    if (isNaN(formData.Horsepower) || formData.Horsepower < 50 || formData.Horsepower > 500) {
+      setErrorMessage('Horsepower must be between 50 and 500 hp.');
+      return;
+    }
+    if (isNaN(formData.CylinderCapacity) || formData.CylinderCapacity < 1000 || formData.CylinderCapacity > 5000) {
+      setErrorMessage('Cylinder Capacity must be between 1000 and 5000 cm³.');
+      return;
+    }
+    
     // Save to localStorage
     localStorage.setItem('carsData', JSON.stringify(updatedCars));
     setSuccessMessage('Car added successfully!');
