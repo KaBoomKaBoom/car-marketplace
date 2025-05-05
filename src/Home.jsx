@@ -57,7 +57,30 @@ function Home() {
           ))}
         </div>
       </section>
-
+      {/* Footer Section */}
+      <footer className="mt-auto py-4  text-center  ">
+        <div className="flex justify-around flex-wrap ">
+          <div>
+            <h3 className="text-xl font-bold">Masinica Mea</h3>
+            <p>MUN. CHISINAU</p>
+            <p>STR. Frumusica, 13</p>
+            <p>+373 999 999 999</p>
+            <p>SALES@GMAIL.COM</p>
+          </div>
+          <div>
+            <h3 className="text-xl font-bold">Leasing</h3>
+            <p>Trade in</p>
+            <p>Exchange</p>
+            <p>Makes and Models</p>
+          </div>
+          <div>
+            <h3 className="text-xl font-bold">Team</h3>
+            <p>Contacts</p>
+            <p>Confidentiality</p>
+            <p>News</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
