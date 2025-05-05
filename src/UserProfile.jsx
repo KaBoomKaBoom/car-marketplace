@@ -1,6 +1,10 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { LikedCarsContext } from './LikedCarsContext';
+import carsData from './cars.json'; // Adjust the path if necessary
 
 function UserProfile() {
+  const { likedCars, removeLikedCar } = useContext(LikedCarsContext);
+
   // Mock user data (replace with real data from backend or localStorage)
   const [user, setUser] = useState({
     name: 'John Doe',
@@ -8,12 +12,6 @@ function UserProfile() {
     phone: '+373 999 999 999',
     notifications: true,
   });
-
-  // Mock saved cars (replace with real data)
-  const [savedCars, setSavedCars] = useState([
-    { id: 1, make: 'Toyota', model: 'Camry', year: 2020, price: 25000 },
-    { id: 2, make: 'Honda', model: 'Civic', year: 2019, price: 22000 },
-  ]);
 
   // State for editing user details
   const [isEditing, setIsEditing] = useState(false);
@@ -97,9 +95,17 @@ function UserProfile() {
       // In a real app, clear auth tokens, session, etc.
       alert('Signed out successfully.');
       // Redirect to login or home page (e.g., using React Router's useNavigate)
-      // For now, we'll just show an alert
     }
   };
+
+  // Map liked car indices to actual car data
+  const savedCars = likedCars.map((index) => ({
+    id: index,
+    make: carsData[index].Make,
+    model: carsData[index].Model,
+    year: carsData[index].Year,
+    price: parseInt(carsData[index].Price),
+  }));
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-textLight dark:text-textDark p-4">
@@ -290,7 +296,7 @@ function UserProfile() {
                     </p>
                   </div>
                   <button
-                    onClick={() => setSavedCars(savedCars.filter((c) => c.id !== car.id))}
+                    onClick={() => removeLikedCar(car.id)}
                     className="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300"
                   >
                     Remove
