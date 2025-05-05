@@ -23,6 +23,19 @@ function Offers() {
     const [likedCars, setLikedCars] = useState([]); // State for liked cars
     const carsPerPage = 20;
 
+    // Load liked cars from localStorage on mount
+    useEffect(() => {
+        const storedLikedCars = localStorage.getItem('likedCars');
+        if (storedLikedCars) {
+            setLikedCars(JSON.parse(storedLikedCars));
+        }
+    }, []);
+
+    // Update localStorage whenever likedCars changes
+    useEffect(() => {
+        localStorage.setItem('likedCars', JSON.stringify(likedCars));
+    }, [likedCars]);
+
     // Function to set initial cars
     useEffect(() => {
         setCars([...carsData]);
