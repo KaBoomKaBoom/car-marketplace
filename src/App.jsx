@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import Offers from './Offers.jsx';
 import Home from './Home.jsx';
+import UserProfile from './UserProfile';
 
 function App() {
   const [theme, setTheme] = useState(() => {
@@ -39,6 +40,9 @@ function App() {
             <Link to="/add" className="text-white hover:text-accent dark:hover:text-accent">
               Add Car
             </Link>
+            <Link to="/profile" className="text-white hover:text-accent dark:hover:text-accent">
+              Profile
+            </Link>
             <button
               onClick={toggleTheme}
               className="bg-secondary text-white px-3 py-1 rounded hover:bg-accent dark:bg-gray-600 dark:hover:bg-accent transition-colors"
@@ -53,6 +57,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/add" element={<div className="bg-white dark:bg-gray-700 text-textLight dark:text-textDark p-6 rounded-lg shadow-md">Add Car Page (TBD)</div>} />
           <Route path="/offers" element={<Offers />} />
+          <Route path="/profile" element={<UserProfile />} />
         </Routes>
       </div>
     </div>
