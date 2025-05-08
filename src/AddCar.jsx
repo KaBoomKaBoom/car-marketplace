@@ -32,6 +32,15 @@ function AddCar() {
   const yearValue = watch('Year');
   const priceValue = watch('Price');
 
+  // Extract unique values for dropdowns
+  const uniqueMakes = [...new Set(carsData.map((car) => car.Make))].sort();
+  const uniqueModels = [...new Set(carsData.map((car) => car.Model))].sort();
+  const uniqueFuels = [...new Set(carsData.map((car) => car.Fuel))].sort();
+  const uniqueTransmissions = [...new Set(carsData.map((car) => car.Transmission))].sort();
+  const uniqueTypes = [...new Set(carsData.map((car) => car.Type))].sort();
+  const uniqueDrives = [...new Set(carsData.map((car) => car.Drive))].sort();
+  const uniqueConditions = [...new Set(carsData.map((car) => car.Condition))].sort();
+
   const onSubmit = (data) => {
     // Load current cars from localStorage or default to imported carsData
     const currentCars = localStorage.getItem('carsData')
@@ -66,14 +75,20 @@ function AddCar() {
           <div>
             <label htmlFor="Make" className="block text-sm font-medium mb-1">
               Make
-              {/* Show asterisk only if field is empty or has errors */}
               {(!makeValue || errors.Make) && <span className="text-red-600 ml-1">*</span>}
             </label>
-            <input
+            <select
               id="Make"
               {...register('Make', { required: 'Make is required' })}
               className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
-            />
+            >
+              <option value="">Select Make</option>
+              {uniqueMakes.map((make) => (
+                <option key={make} value={make}>
+                  {make}
+                </option>
+              ))}
+            </select>
             {errors.Make && <p className="text-red-600 text-sm mt-1">{errors.Make.message}</p>}
           </div>
           <div>
@@ -81,11 +96,18 @@ function AddCar() {
               Model
               {(!modelValue || errors.Model) && <span className="text-red-600 ml-1">*</span>}
             </label>
-            <input
+            <select
               id="Model"
               {...register('Model', { required: 'Model is required' })}
               className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
-            />
+            >
+              <option value="">Select Model</option>
+              {uniqueModels.map((model) => (
+                <option key={model} value={model}>
+                  {model}
+                </option>
+              ))}
+            </select>
             {errors.Model && <p className="text-red-600 text-sm mt-1">{errors.Model.message}</p>}
           </div>
           <div>
@@ -144,11 +166,18 @@ function AddCar() {
             <label htmlFor="Fuel" className="block text-sm font-medium mb-1">
               Fuel
             </label>
-            <input
+            <select
               id="Fuel"
               {...register('Fuel')}
               className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
-            />
+            >
+              <option value="">Select Fuel</option>
+              {uniqueFuels.map((fuel) => (
+                <option key={fuel} value={fuel}>
+                  {fuel}
+                </option>
+              ))}
+            </select>
           </div>
           <div>
             <label htmlFor="Horsepower" className="block text-sm font-medium mb-1">
@@ -186,41 +215,69 @@ function AddCar() {
             <label htmlFor="Transmission" className="block text-sm font-medium mb-1">
               Transmission
             </label>
-            <input
+            <select
               id="Transmission"
               {...register('Transmission')}
               className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
-            />
+            >
+              <option value="">Select Transmission</option>
+              {uniqueTransmissions.map((transmission) => (
+                <option key={transmission} value={transmission}>
+                  {transmission}
+                </option>
+              ))}
+            </select>
           </div>
           <div>
             <label htmlFor="Type" className="block text-sm font-medium mb-1">
               Body Type
             </label>
-            <input
+            <select
               id="Type"
               {...register('Type')}
               className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
-            />
+            >
+              <option value="">Select Body Type</option>
+              {uniqueTypes.map((type) => (
+                <option key={type} value={type}>
+                  {type}
+                </option>
+              ))}
+            </select>
           </div>
           <div>
             <label htmlFor="Drive" className="block text-sm font-medium mb-1">
               Drive
             </label>
-            <input
+            <select
               id="Drive"
               {...register('Drive')}
               className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
-            />
+            >
+              <option value="">Select Drive</option>
+              {uniqueDrives.map((drive) => (
+                <option key={drive} value={drive}>
+                  {drive}
+                </option>
+              ))}
+            </select>
           </div>
           <div>
             <label htmlFor="Condition" className="block text-sm font-medium mb-1">
               Condition
             </label>
-            <input
+            <select
               id="Condition"
               {...register('Condition')}
               className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
-            />
+            >
+              <option value="">Select Condition</option>
+              {uniqueConditions.map((condition) => (
+                <option key={condition} value={condition}>
+                  {condition}
+                </option>
+              ))}
+            </select>
           </div>
           <div>
             <label htmlFor="ImageURL" className="block text-sm font-medium mb-1">
