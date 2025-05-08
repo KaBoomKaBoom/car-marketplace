@@ -3,6 +3,7 @@ import { Routes, Route, Link } from 'react-router-dom';
 import Offers from './Offers.jsx';
 import Home from './Home.jsx';
 import UserProfile from './UserProfile';
+import AddCar from './AddCar.jsx';
 import { LikedCarsProvider } from './LikedCarsContext';
 
 function App() {
@@ -38,7 +39,7 @@ function App() {
             <Link to="/offers" className="text-white hover:text-accent dark:hover:text-accent">
               Offers
             </Link>
-            <Link to="/add" className="text-white hover:text-accent dark:hover:text-accent">
+            <Link to="/add-car" className="text-white hover:text-accent dark:hover:text-accent">
               Add Car
             </Link>
             <Link to="/profile" className="text-white hover:text-accent dark:hover:text-accent">
@@ -60,6 +61,7 @@ function App() {
             <Route path="/add" element={<div className="bg-white dark:bg-gray-700 text-textLight dark:text-textDark p-6 rounded-lg shadow-md">Add Car Page (TBD)</div>} />
             <Route path="/offers" element={<Offers />} />
             <Route path="/profile" element={<UserProfile />} />
+            <Route path="/add-car" element={<AddCar />} />
           </Routes>
         </LikedCarsProvider>
       </div>

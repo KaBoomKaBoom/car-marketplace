@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
 import { LikedCarsContext } from './LikedCarsContext';
-import carsData from './cars.json'; // Adjust the path if necessary
 
 function Offers() {
     const { likedCars, toggleLike } = useContext(LikedCarsContext);
@@ -25,9 +24,10 @@ function Offers() {
     const [searchTerm, setSearchTerm] = useState('');
     const carsPerPage = 20;
 
-    // Function to set initial cars
+    // Load cars from localStorage or default to cars.json
     useEffect(() => {
-        setCars([...carsData]);
+        const storedCars = localStorage.getItem('carsData');
+        setCars(storedCars ? JSON.parse(storedCars) : []);
     }, []);
 
     // Update filtered cars based on filters and search term
@@ -98,13 +98,13 @@ function Offers() {
     }, [filters, cars, searchTerm]);
 
     // Extract unique values for dropdowns
-    const uniqueMakes = [...new Set(carsData.map((car) => car.Make))];
-    const uniqueModels = [...new Set(carsData.map((car) => car.Model))];
-    const uniqueTransmissions = [...new Set(carsData.map((car) => car.Transmission))];
-    const uniqueBodyTypes = [...new Set(carsData.map((car) => car.Type))];
-    const uniqueFuels = [...new Set(carsData.map((car) => car.Fuel))];
-    const uniqueDrives = [...new Set(carsData.map((car) => car.Drive))];
-    const uniqueConditions = [...new Set(carsData.map((car) => car.Condition))];
+    const uniqueMakes = [...new Set(cars.map((car) => car.Make))];
+    const uniqueModels = [...new Set(cars.map((car) => car.Model))];
+    const uniqueTransmissions = [...new Set(cars.map((car) => car.Transmission))];
+    const uniqueBodyTypes = [...new Set(cars.map((car) => car.Type))];
+    const uniqueFuels = [...new Set(cars.map((car) => car.Fuel))];
+    const uniqueDrives = [...new Set(cars.map((car) => car.Drive))];
+    const uniqueConditions = [...new Set(cars.map((car) => car.Condition))];
 
     // Pagination logic
     const indexOfLastCar = currentPage * carsPerPage;
@@ -132,7 +132,7 @@ function Offers() {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
                     {currentCars.map((car, index) => {
-                        const globalIndex = carsData.indexOf(car); // Get the car's index in the original dataset
+                        const globalIndex = cars.indexOf(car); // Get the car's index in the current dataset
                         const mileage = car.Mileage;
                         const isLiked = likedCars.includes(globalIndex);
 

@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { LikedCarsContext } from './LikedCarsContext';
 import carsData from './cars.json'; // Adjust the path if necessary
 
@@ -25,6 +25,15 @@ function UserProfile() {
     newPassword: '',
     confirmPassword: '',
   });
+
+  // Load and manage added cars from localStorage
+  const [addedCars, setAddedCars] = useState([]);
+  useEffect(() => {
+    const storedCars = localStorage.getItem('carsData');
+    if (storedCars) {
+      setAddedCars(JSON.parse(storedCars));
+    }
+  }, []);
 
   // Handle input changes for user details
   const handleInputChange = (e) => {
@@ -96,6 +105,13 @@ function UserProfile() {
       alert('Signed out successfully.');
       // Redirect to login or home page (e.g., using React Router's useNavigate)
     }
+  };
+
+  // Remove an added car
+  const handleRemoveAddedCar = (index) => {
+    const updatedCars = addedCars.filter((_, i) => i !== index);
+    localStorage.setItem('carsData', JSON.stringify(updatedCars));
+    setAddedCars(updatedCars);
   };
 
   // Map liked car indices to actual car data
@@ -306,6 +322,39 @@ function UserProfile() {
             </div>
           ) : (
             <p>No saved cars yet.</p>
+          )}
+        </section>
+
+        {/* Added Cars Section */}
+        <section className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
+          <h2 className="text-2xl font-semibold mb-4">Added Cars</h2>
+          {addedCars.length > carsData.length ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {addedCars.slice(carsData.length).map((car, index) => (
+                <div
+                  key={index}
+                  className="bg-gray-50 dark:bg-gray-700 rounded-lg shadow-md p-4 flex justify-between items-center"
+                >
+                  <div>
+                    <h3 className="text-lg font-semibold">
+                      {car.Make} {car.Model}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm">{car.Year}</p>
+                    <p className="text-gray-800 dark:text-gray-200 font-bold">
+                      {car.Price.toLocaleString()} €
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => handleRemoveAddedCar(carsData.length + index)}
+                    className="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300"
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p>No added cars yet.</p>
           )}
         </section>
 
