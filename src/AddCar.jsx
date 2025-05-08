@@ -1,64 +1,14 @@
-import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import carsData from './cars.json'; // Adjust the path if necessary
 
 function AddCar() {
-  const [formData, setFormData] = useState({
-    Make: '',
-    Model: '',
-    Year: '',
-    Price: '',
-    Mileage: '',
-    Fuel: '',
-    Horsepower: '',
-    CylinderCapacity: '',
-    Transmission: '',
-    Type: '',
-    Drive: '',
-    Condition: '',
-    ImageURL: '',
-  });
-  const [successMessage, setSuccessMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Basic validation
-    if (!formData.Make || !formData.Model || !formData.Year || !formData.Price) {
-      setErrorMessage('Make, Model, Year, and Price are required.');
-      return;
-    }
-    if (isNaN(formData.Year) || formData.Year < 2010 || formData.Year > 2025) {
-      setErrorMessage('Year must be between 2010 and 2025.');
-      return;
-    }
-    if (isNaN(formData.Price) || formData.Price < 0 || formData.Price > 94990) {
-      setErrorMessage('Price must be between 0 and 94,990 €.');
-      return;
-    }
-    if (isNaN(formData.Mileage) || formData.Mileage < 0 || formData.Mileage > 300000) {
-      setErrorMessage('Mileage must be between 0 and 300,000 km.');
-      return;
-    }
-    if (isNaN(formData.Horsepower) || formData.Horsepower < 50 || formData.Horsepower > 500) {
-      setErrorMessage('Horsepower must be between 50 and 500 hp.');
-      return;
-    }
-    if (isNaN(formData.CylinderCapacity) || formData.CylinderCapacity < 1000 || formData.CylinderCapacity > 5000) {
-      setErrorMessage('Cylinder Capacity must be between 1000 and 5000 cm³.');
-      return;
-    }
-    
-    // Save to localStorage
-    localStorage.setItem('carsData', JSON.stringify(updatedCars));
-    setSuccessMessage('Car added successfully!');
-    setErrorMessage('');
-    setFormData({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    defaultValues: {
       Make: '',
       Model: '',
       Year: '',
@@ -72,7 +22,32 @@ function AddCar() {
       Drive: '',
       Condition: '',
       ImageURL: '',
-    });
+    },
+  });
+
+  const onSubmit = (data) => {
+    // Load current cars from localStorage or default to imported carsData
+    const currentCars = localStorage.getItem('carsData')
+      ? JSON.parse(localStorage.getItem('carsData'))
+      : carsData;
+
+    // Basic data transformation
+    const newCar = {
+      ...data,
+      Year: parseInt(data.Year) || 0,
+      Price: parseInt(data.Price) || 0,
+      Mileage: parseInt(data.Mileage) || 0,
+      Horsepower: parseInt(data.Horsepower) || 0,
+      CylinderCapacity: parseInt(data.CylinderCapacity) || 0,
+    };
+
+    // Append the new car to the current cars
+    const updatedCarsData = [...currentCars, newCar];
+
+    // Save to localStorage
+    localStorage.setItem('carsData', JSON.stringify(updatedCarsData));
+    alert('Car added successfully!');
+    reset();
   };
 
   return (
@@ -80,46 +55,28 @@ function AddCar() {
       <div className="max-w-2xl mx-auto">
         <h1 className="text-3xl font-bold mb-6">Add a Car</h1>
 
-        {/* Success/Error Messages */}
-        {successMessage && (
-          <div className="mb-4 p-4 bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-200 rounded-lg">
-            {successMessage}
-          </div>
-        )}
-        {errorMessage && (
-          <div className="mb-4 p-4 bg-red-100 dark:bg-red-800 text-red-800 dark:text-red-200 rounded-lg">
-            {errorMessage}
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 space-y-6">
+        <form onSubmit={handleSubmit(onSubmit)} className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 space-y-6">
           <div>
             <label htmlFor="Make" className="block text-sm font-medium mb-1">
               Make
             </label>
             <input
-              type="text"
               id="Make"
-              name="Make"
-              value={formData.Make}
-              onChange={handleInputChange}
+              {...register('Make', { required: 'Make is required' })}
               className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
-              required
             />
+            {errors.Make && <p className="text-red-600 text-sm mt-1">{errors.Make.message}</p>}
           </div>
           <div>
             <label htmlFor="Model" className="block text-sm font-medium mb-1">
               Model
             </label>
             <input
-              type="text"
               id="Model"
-              name="Model"
-              value={formData.Model}
-              onChange={handleInputChange}
+              {...register('Model', { required: 'Model is required' })}
               className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
-              required
             />
+            {errors.Model && <p className="text-red-600 text-sm mt-1">{errors.Model.message}</p>}
           </div>
           <div>
             <label htmlFor="Year" className="block text-sm font-medium mb-1">
@@ -128,14 +85,15 @@ function AddCar() {
             <input
               type="number"
               id="Year"
-              name="Year"
-              value={formData.Year}
-              onChange={handleInputChange}
+              {...register('Year', {
+                required: 'Year is required',
+                min: { value: 2010, message: 'Year must be at least 2010' },
+                max: { value: 2025, message: 'Year must not exceed 2025' },
+                valueAsNumber: true,
+              })}
               className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
-              min="2010"
-              max="2025"
-              required
             />
+            {errors.Year && <p className="text-red-600 text-sm mt-1">{errors.Year.message}</p>}
           </div>
           <div>
             <label htmlFor="Price" className="block text-sm font-medium mb-1">
@@ -144,14 +102,15 @@ function AddCar() {
             <input
               type="number"
               id="Price"
-              name="Price"
-              value={formData.Price}
-              onChange={handleInputChange}
+              {...register('Price', {
+                required: 'Price is required',
+                min: { value: 0, message: 'Price must be at least 0 €' },
+                max: { value: 94990, message: 'Price must not exceed 94,990 €' },
+                valueAsNumber: true,
+              })}
               className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
-              min="0"
-              max="94990"
-              required
             />
+            {errors.Price && <p className="text-red-600 text-sm mt-1">{errors.Price.message}</p>}
           </div>
           <div>
             <label htmlFor="Mileage" className="block text-sm font-medium mb-1">
@@ -160,24 +119,22 @@ function AddCar() {
             <input
               type="number"
               id="Mileage"
-              name="Mileage"
-              value={formData.Mileage}
-              onChange={handleInputChange}
+              {...register('Mileage', {
+                min: { value: 0, message: 'Mileage must be at least 0 km' },
+                max: { value: 300000, message: 'Mileage must not exceed 300,000 km' },
+                valueAsNumber: true,
+              })}
               className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
-              min="0"
-              max="300000"
             />
+            {errors.Mileage && <p className="text-red-600 text-sm mt-1">{errors.Mileage.message}</p>}
           </div>
           <div>
             <label htmlFor="Fuel" className="block text-sm font-medium mb-1">
               Fuel
             </label>
             <input
-              type="text"
               id="Fuel"
-              name="Fuel"
-              value={formData.Fuel}
-              onChange={handleInputChange}
+              {...register('Fuel')}
               className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
             />
           </div>
@@ -188,13 +145,14 @@ function AddCar() {
             <input
               type="number"
               id="Horsepower"
-              name="Horsepower"
-              value={formData.Horsepower}
-              onChange={handleInputChange}
+              {...register('Horsepower', {
+                min: { value: 50, message: 'Horsepower must be at least 50 hp' },
+                max: { value: 500, message: 'Horsepower must not exceed 500 hp' },
+                valueAsNumber: true,
+              })}
               className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
-              min="50"
-              max="500"
             />
+            {errors.Horsepower && <p className="text-red-600 text-sm mt-1">{errors.Horsepower.message}</p>}
           </div>
           <div>
             <label htmlFor="CylinderCapacity" className="block text-sm font-medium mb-1">
@@ -203,24 +161,22 @@ function AddCar() {
             <input
               type="number"
               id="CylinderCapacity"
-              name="CylinderCapacity"
-              value={formData.CylinderCapacity}
-              onChange={handleInputChange}
+              {...register('CylinderCapacity', {
+                min: { value: 1000, message: 'Cylinder Capacity must be at least 1000 cm³' },
+                max: { value: 5000, message: 'Cylinder Capacity must not exceed 5000 cm³' },
+                valueAsNumber: true,
+              })}
               className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
-              min="1000"
-              max="5000"
             />
+            {errors.CylinderCapacity && <p className="text-red-600 text-sm mt-1">{errors.CylinderCapacity.message}</p>}
           </div>
           <div>
             <label htmlFor="Transmission" className="block text-sm font-medium mb-1">
               Transmission
             </label>
             <input
-              type="text"
               id="Transmission"
-              name="Transmission"
-              value={formData.Transmission}
-              onChange={handleInputChange}
+              {...register('Transmission')}
               className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
             />
           </div>
@@ -229,11 +185,8 @@ function AddCar() {
               Body Type
             </label>
             <input
-              type="text"
               id="Type"
-              name="Type"
-              value={formData.Type}
-              onChange={handleInputChange}
+              {...register('Type')}
               className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
             />
           </div>
@@ -242,11 +195,8 @@ function AddCar() {
               Drive
             </label>
             <input
-              type="text"
               id="Drive"
-              name="Drive"
-              value={formData.Drive}
-              onChange={handleInputChange}
+              {...register('Drive')}
               className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
             />
           </div>
@@ -255,11 +205,8 @@ function AddCar() {
               Condition
             </label>
             <input
-              type="text"
               id="Condition"
-              name="Condition"
-              value={formData.Condition}
-              onChange={handleInputChange}
+              {...register('Condition')}
               className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
             />
           </div>
@@ -270,9 +217,7 @@ function AddCar() {
             <input
               type="url"
               id="ImageURL"
-              name="ImageURL"
-              value={formData.ImageURL}
-              onChange={handleInputChange}
+              {...register('ImageURL')}
               className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
             />
           </div>
