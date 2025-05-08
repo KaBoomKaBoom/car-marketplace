@@ -1,5 +1,76 @@
-import { useForm } from 'react-hook-form';
+import { useForm, useController } from 'react-hook-form';
 import carsData from './cars.json'; // Adjust the path if necessary
+import { useState, useEffect } from 'react';
+
+function SearchableDropdown({ name, label, options, control, rules, errors, watchValue }) {
+  const {
+    field: { onChange, value },
+  } = useController({
+    name,
+    control,
+    rules,
+    defaultValue: '',
+  });
+
+  const [inputValue, setInputValue] = useState(value || '');
+  const [filteredOptions, setFilteredOptions] = useState(options);
+
+  useEffect(() => {
+    const filtered = options.filter((option) =>
+      option.toLowerCase().includes(inputValue.toLowerCase())
+    );
+    setFilteredOptions(filtered);
+  }, [inputValue, options]);
+
+  useEffect(() => {
+    setInputValue(value || '');
+    const filtered = options.filter((option) =>
+      option.toLowerCase().includes(value.toLowerCase())
+    );
+    setFilteredOptions(filtered);
+  }, [value, options]);
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+    onChange(e.target.value); // Sync with form
+  };
+
+  const handleOptionSelect = (selectedValue) => {
+    setInputValue(selectedValue);
+    onChange(selectedValue);
+    setFilteredOptions(options); // Reset to full list after selection
+  };
+
+  return (
+    <div>
+      <label htmlFor={name} className="block text-sm font-medium mb-1">
+        {label}
+        {(!watchValue || errors[name]) && <span className="text-red-600 ml-1">*</span>}
+      </label>
+      <input
+        id={name}
+        value={inputValue}
+        onChange={handleInputChange}
+        className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
+        autoComplete="off"
+      />
+      {inputValue && filteredOptions.length > 0 && (
+        <ul className="absolute z-10 w-full mt-1 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-md max-h-40 overflow-y-auto">
+          {filteredOptions.map((option) => (
+            <li
+              key={option}
+              onClick={() => handleOptionSelect(option)}
+              className="p-2 hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer"
+            >
+              {option}
+            </li>
+          ))}
+        </ul>
+      )}
+      {errors[name] && <p className="text-red-600 text-sm mt-1">{errors[name].message}</p>}
+    </div>
+  );
+}
 
 function AddCar() {
   const {
@@ -7,6 +78,7 @@ function AddCar() {
     handleSubmit,
     formState: { errors },
     reset,
+    control,
     watch,
   } = useForm({
     defaultValues: {
@@ -67,48 +139,32 @@ function AddCar() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-textLight dark:text-textDark p-4">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-textLight dark:text-textDark p-4 relative">
       <div className="max-w-2xl mx-auto">
         <h1 className="text-3xl font-bold mb-6">Add a Car</h1>
 
         <form onSubmit={handleSubmit(onSubmit)} className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 space-y-6">
           <div>
-            <label htmlFor="Make" className="block text-sm font-medium mb-1">
-              Make
-              {(!makeValue || errors.Make) && <span className="text-red-600 ml-1">*</span>}
-            </label>
-            <select
-              id="Make"
-              {...register('Make', { required: 'Make is required' })}
-              className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
-            >
-              <option value="">Select Make</option>
-              {uniqueMakes.map((make) => (
-                <option key={make} value={make}>
-                  {make}
-                </option>
-              ))}
-            </select>
-            {errors.Make && <p className="text-red-600 text-sm mt-1">{errors.Make.message}</p>}
+            <SearchableDropdown
+              name="Make"
+              label="Make"
+              options={uniqueMakes}
+              control={control}
+              rules={{ required: 'Make is required' }}
+              errors={errors}
+              watchValue={makeValue}
+            />
           </div>
           <div>
-            <label htmlFor="Model" className="block text-sm font-medium mb-1">
-              Model
-              {(!modelValue || errors.Model) && <span className="text-red-600 ml-1">*</span>}
-            </label>
-            <select
-              id="Model"
-              {...register('Model', { required: 'Model is required' })}
-              className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
-            >
-              <option value="">Select Model</option>
-              {uniqueModels.map((model) => (
-                <option key={model} value={model}>
-                  {model}
-                </option>
-              ))}
-            </select>
-            {errors.Model && <p className="text-red-600 text-sm mt-1">{errors.Model.message}</p>}
+            <SearchableDropdown
+              name="Model"
+              label="Model"
+              options={uniqueModels}
+              control={control}
+              rules={{ required: 'Model is required' }}
+              errors={errors}
+              watchValue={modelValue}
+            />
           </div>
           <div>
             <label htmlFor="Year" className="block text-sm font-medium mb-1">
