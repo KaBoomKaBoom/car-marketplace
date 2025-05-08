@@ -7,6 +7,7 @@ function AddCar() {
     handleSubmit,
     formState: { errors },
     reset,
+    watch,
   } = useForm({
     defaultValues: {
       Make: '',
@@ -24,6 +25,12 @@ function AddCar() {
       ImageURL: '',
     },
   });
+
+  // Watch the mandatory fields to determine if they are filled and valid
+  const makeValue = watch('Make');
+  const modelValue = watch('Model');
+  const yearValue = watch('Year');
+  const priceValue = watch('Price');
 
   const onSubmit = (data) => {
     // Load current cars from localStorage or default to imported carsData
@@ -59,6 +66,8 @@ function AddCar() {
           <div>
             <label htmlFor="Make" className="block text-sm font-medium mb-1">
               Make
+              {/* Show asterisk only if field is empty or has errors */}
+              {(!makeValue || errors.Make) && <span className="text-red-600 ml-1">*</span>}
             </label>
             <input
               id="Make"
@@ -70,6 +79,7 @@ function AddCar() {
           <div>
             <label htmlFor="Model" className="block text-sm font-medium mb-1">
               Model
+              {(!modelValue || errors.Model) && <span className="text-red-600 ml-1">*</span>}
             </label>
             <input
               id="Model"
@@ -81,6 +91,7 @@ function AddCar() {
           <div>
             <label htmlFor="Year" className="block text-sm font-medium mb-1">
               Year
+              {(!yearValue || errors.Year) && <span className="text-red-600 ml-1">*</span>}
             </label>
             <input
               type="number"
@@ -98,6 +109,7 @@ function AddCar() {
           <div>
             <label htmlFor="Price" className="block text-sm font-medium mb-1">
               Price (€)
+              {(!priceValue || errors.Price) && <span className="text-red-600 ml-1">*</span>}
             </label>
             <input
               type="number"
