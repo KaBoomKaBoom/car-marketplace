@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { LikedCarsContext } from './LikedCarsContext';
+import { Link } from 'react-router-dom';
 import FilterComponent from './components/FilterComponent';
 
 function Offers() {
@@ -142,13 +143,26 @@ function Offers() {
                         const isLiked = likedCars.includes(globalIndex);
 
                         return (
-                            <div key={index} className="bg-white dark:bg-gray-700 rounded-lg shadow-md relative transition-transform transform hover:scale-105 duration-300">
-                                <img src={car.ImageURL} alt={`${car.Make} ${car.Model}`} className="w-full h-40 object-cover rounded-t-lg" />
+                            <Link
+                                to={`/car-details/${globalIndex}`}
+                                key={index}
+                                className="block bg-white dark:bg-gray-700 rounded-lg shadow-md relative transition-transform transform hover:scale-105 duration-300"
+                            >
+                                <img
+                                    src={car.ImageURL}
+                                    alt={`${car.Make} ${car.Model}`}
+                                    className="w-full h-40 object-cover rounded-t-lg"
+                                />
                                 <div className="p-4">
                                     <div className="flex justify-between items-center">
-                                        <h3 className="text-lg font-semibold text-textLight dark:text-textDark">{car.Make} {car.Model}</h3>
+                                        <h3 className="text-lg font-semibold text-textLight dark:text-textDark">
+                                            {car.Make} {car.Model}
+                                        </h3>
                                         <button
-                                            onClick={() => toggleLike(globalIndex)}
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                toggleLike(globalIndex);
+                                            }}
                                             className="focus:outline-none"
                                             aria-label={isLiked ? 'Unlike car' : 'Like car'}
                                         >
@@ -171,20 +185,53 @@ function Offers() {
                                     <p className="text-gray-600 dark:text-gray-400 text-sm">{car.Year} | {mileage} Km</p>
                                     <div className="flex items-center space-x-2 mt-2 text-gray-600 dark:text-gray-400 text-sm">
                                         <span className="flex items-center">
-                                            <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                            <svg
+                                                className="w-4 h-4 mr-1"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth="2"
+                                                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                                                />
                                             </svg>
                                             {car.Fuel}
                                         </span>
                                         <span className="flex items-center">
-                                            <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                            <svg
+                                                className="w-4 h-4 mr-1"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth="2"
+                                                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                                                />
                                             </svg>
                                             {car.Horsepower} hp
                                         </span>
                                         <span className="flex items-center">
-                                            <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 17.5v-5h6v5m-3-5V7m-5 5h10"></path>
+                                            <svg
+                                                className="w-4 h-4 mr-1"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth="2"
+                                                    d="M9 17.5v-5h6v5m-3-5V7m-5 5h10"
+                                                />
                                             </svg>
                                             {car.Transmission}
                                         </span>
@@ -193,7 +240,7 @@ function Offers() {
                                         {parseInt(car.Price).toLocaleString()} €
                                     </p>
                                 </div>
-                            </div>
+                            </Link>
                         );
                     })}
                 </div>
