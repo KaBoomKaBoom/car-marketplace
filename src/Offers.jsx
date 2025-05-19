@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { LikedCarsContext } from './LikedCarsContext';
+import FilterComponent from './components/FilterComponent';
 
 function Offers() {
     const { likedCars, toggleLike } = useContext(LikedCarsContext);
@@ -116,6 +117,10 @@ function Offers() {
     const nextPage = () => setCurrentPage((prev) => Math.min(prev + 1, totalPages));
     const prevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
 
+    const handleFilterChange = (newFilters) => {
+        setFilters(newFilters);
+    };
+
     return (
         <div className="flex flex-col lg:flex-row space-y-6 lg:space-y-0 lg:space-x-6 p-4">
             {/* Car Showcase */}
@@ -222,299 +227,16 @@ function Offers() {
 
             {/* Filter Sidebar */}
             <div className="lg:w-1/4">
-                <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-md space-y-4">
-                    <h2 className="text-lg font-semibold text-textLight dark:text-textDark">Filters</h2>
-                    <select
-                        value={filters.make}
-                        onChange={(e) => setFilters({ ...filters, make: e.target.value, model: '' })}
-                        className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
-                    >
-                        <option value="">Make</option>
-                        {uniqueMakes.map((make) => (
-                            <option key={make} value={make}>
-                                {make}
-                            </option>
-                        ))}
-                    </select>
-                    <select
-                        value={filters.model}
-                        onChange={(e) => setFilters({ ...filters, model: e.target.value })}
-                        className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
-                        disabled={!filters.make}
-                    >
-                        <option value="">Model</option>
-                        {uniqueModels.map((model) => (
-                            <option key={model} value={model}>
-                                {model}
-                            </option>
-                        ))}
-                    </select>
-                    <div>
-                        <label className="text-textLight dark:text-textDark">Price</label>
-                        <input
-                            type="range"
-                            min="0"
-                            max="94990"
-                            value={filters.priceRange[0]}
-                            onChange={(e) => setFilters({ ...filters, priceRange: [parseInt(e.target.value), filters.priceRange[1]] })}
-                            className="w-full mt-1"
-                        />
-                        <input
-                            type="range"
-                            min="0"
-                            max="94990"
-                            value={filters.priceRange[1]}
-                            onChange={(e) => setFilters({ ...filters, priceRange: [filters.priceRange[0], parseInt(e.target.value)] })}
-                            className="w-full mt-1"
-                        />
-                        <div className="flex justify-between space-x-2 mt-2">
-                            <input
-                                type="number"
-                                value={filters.priceRange[0]}
-                                onChange={(e) => setFilters({ ...filters, priceRange: [parseInt(e.target.value) || 0, filters.priceRange[1]] })}
-                                min="0"
-                                max={filters.priceRange[1]}
-                                className="w-1/2 p-1 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
-                            />
-                            <input
-                                type="number"
-                                value={filters.priceRange[1]}
-                                onChange={(e) => setFilters({ ...filters, priceRange: [filters.priceRange[0], parseInt(e.target.value) || 94990] })}
-                                min={filters.priceRange[0]}
-                                max="94990"
-                                className="w-1/2 p-1 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
-                            />
-                        </div>
-                        <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mt-1">
-                            <span>{filters.priceRange[0].toLocaleString()} €</span>
-                            <span>{filters.priceRange[1].toLocaleString()} €</span>
-                        </div>
-                    </div>
-                    <div>
-                        <label className="text-textLight dark:text-textDark">Year</label>
-                        <input
-                            type="range"
-                            min="2010"
-                            max="2025"
-                            value={filters.yearRange[0]}
-                            onChange={(e) => setFilters({ ...filters, yearRange: [parseInt(e.target.value), filters.yearRange[1]] })}
-                            className="w-full mt-1"
-                        />
-                        <input
-                            type="range"
-                            min="2010"
-                            max="2025"
-                            value={filters.yearRange[1]}
-                            onChange={(e) => setFilters({ ...filters, yearRange: [filters.yearRange[0], parseInt(e.target.value)] })}
-                            className="w-full mt-1"
-                        />
-                        <div className="flex justify-between space-x-2 mt-2">
-                            <input
-                                type="number"
-                                value={filters.yearRange[0]}
-                                onChange={(e) => setFilters({ ...filters, yearRange: [parseInt(e.target.value) || 2010, filters.yearRange[1]] })}
-                                min="2010"
-                                max={filters.yearRange[1]}
-                                className="w-1/2 p-1 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
-                            />
-                            <input
-                                type="number"
-                                value={filters.yearRange[1]}
-                                onChange={(e) => setFilters({ ...filters, yearRange: [filters.yearRange[0], parseInt(e.target.value) || 2025] })}
-                                min={filters.yearRange[0]}
-                                max="2025"
-                                className="w-1/2 p-1 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
-                            />
-                        </div>
-                        <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mt-1">
-                            <span>{filters.yearRange[0]}</span>
-                            <span>{filters.yearRange[1]}</span>
-                        </div>
-                    </div>
-                    <div>
-                        <label className="text-textLight dark:text-textDark">Mileage</label>
-                        <input
-                            type="range"
-                            min="0"
-                            max="300000"
-                            value={filters.mileageRange[0]}
-                            onChange={(e) => setFilters({ ...filters, mileageRange: [parseInt(e.target.value), filters.mileageRange[1]] })}
-                            className="w-full mt-1"
-                        />
-                        <input
-                            type="range"
-                            min="0"
-                            max="300000"
-                            value={filters.mileageRange[1]}
-                            onChange={(e) => setFilters({ ...filters, mileageRange: [filters.mileageRange[0], parseInt(e.target.value)] })}
-                            className="w-full mt-1"
-                        />
-                        <div className="flex justify-between space-x-2 mt-2">
-                            <input
-                                type="number"
-                                value={filters.mileageRange[0]}
-                                onChange={(e) => setFilters({ ...filters, mileageRange: [parseInt(e.target.value) || 0, filters.mileageRange[1]] })}
-                                min="0"
-                                max={filters.mileageRange[1]}
-                                className="w-1/2 p-1 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
-                            />
-                            <input
-                                type="number"
-                                value={filters.mileageRange[1]}
-                                onChange={(e) => setFilters({ ...filters, mileageRange: [filters.mileageRange[0], parseInt(e.target.value) || 300000] })}
-                                min={filters.mileageRange[0]}
-                                max="300000"
-                                className="w-1/2 p-1 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
-                            />
-                        </div>
-                        <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mt-1">
-                            <span>{filters.mileageRange[0].toLocaleString()} km</span>
-                            <span>{filters.mileageRange[1].toLocaleString()} km</span>
-                        </div>
-                    </div>
-                    <div>
-                        <label className="text-textLight dark:text-textDark">Cylinder Capacity</label>
-                        <input
-                            type="range"
-                            min="1000"
-                            max="5000"
-                            value={filters.cylinderCapacityRange[0]}
-                            onChange={(e) => setFilters({ ...filters, cylinderCapacityRange: [parseInt(e.target.value), filters.cylinderCapacityRange[1]] })}
-                            className="w-full mt-1"
-                        />
-                        <input
-                            type="range"
-                            min="1000"
-                            max="5000"
-                            value={filters.cylinderCapacityRange[1]}
-                            onChange={(e) => setFilters({ ...filters, cylinderCapacityRange: [filters.cylinderCapacityRange[0], parseInt(e.target.value)] })}
-                            className="w-full mt-1"
-                        />
-                        <div className="flex justify-between space-x-2 mt-2">
-                            <input
-                                type="number"
-                                value={filters.cylinderCapacityRange[0]}
-                                onChange={(e) => setFilters({ ...filters, cylinderCapacityRange: [parseInt(e.target.value) || 1000, filters.cylinderCapacityRange[1]] })}
-                                min="1000"
-                                max={filters.cylinderCapacityRange[1]}
-                                className="w-1/2 p-1 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
-                            />
-                            <input
-                                type="number"
-                                value={filters.cylinderCapacityRange[1]}
-                                onChange={(e) => setFilters({ ...filters, cylinderCapacityRange: [filters.cylinderCapacityRange[0], parseInt(e.target.value) || 5000] })}
-                                min={filters.cylinderCapacityRange[0]}
-                                max="5000"
-                                className="w-1/2 p-1 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
-                            />
-                        </div>
-                        <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mt-1">
-                            <span>{filters.cylinderCapacityRange[0].toLocaleString()} cm³</span>
-                            <span>{filters.cylinderCapacityRange[1].toLocaleString()} cm³</span>
-                        </div>
-                    </div>
-                    <div>
-                        <label className="text-textLight dark:text-textDark">Horsepower</label>
-                        <input
-                            type="range"
-                            min="50"
-                            max="500"
-                            value={filters.horsepowerRange[0]}
-                            onChange={(e) => setFilters({ ...filters, horsepowerRange: [parseInt(e.target.value), filters.horsepowerRange[1]] })}
-                            className="w-full mt-1"
-                        />
-                        <input
-                            type="range"
-                            min="50"
-                            max="500"
-                            value={filters.horsepowerRange[1]}
-                            onChange={(e) => setFilters({ ...filters, horsepowerRange: [filters.horsepowerRange[0], parseInt(e.target.value)] })}
-                            className="w-full mt-1"
-                        />
-                        <div className="flex justify-between space-x-2 mt-2">
-                            <input
-                                type="number"
-                                value={filters.horsepowerRange[0]}
-                                onChange={(e) => setFilters({ ...filters, horsepowerRange: [parseInt(e.target.value) || 50, filters.horsepowerRange[1]] })}
-                                min="50"
-                                max={filters.horsepowerRange[1]}
-                                className="w-1/2 p-1 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
-                            />
-                            <input
-                                type="number"
-                                value={filters.horsepowerRange[1]}
-                                onChange={(e) => setFilters({ ...filters, horsepowerRange: [filters.horsepowerRange[0], parseInt(e.target.value) || 500] })}
-                                min={filters.horsepowerRange[0]}
-                                max="500"
-                                className="w-1/2 p-1 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
-                            />
-                        </div>
-                        <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mt-1">
-                            <span>{filters.horsepowerRange[0]} hp</span>
-                            <span>{filters.horsepowerRange[1]} hp</span>
-                        </div>
-                    </div>
-                    <select
-                        value={filters.transmission}
-                        onChange={(e) => setFilters({ ...filters, transmission: e.target.value })}
-                        className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
-                    >
-                        <option value="">Transmission</option>
-                        {uniqueTransmissions.map((transmission) => (
-                            <option key={transmission} value={transmission}>
-                                {transmission}
-                            </option>
-                        ))}
-                    </select>
-                    <select
-                        value={filters.bodyType}
-                        onChange={(e) => setFilters({ ...filters, bodyType: e.target.value })}
-                        className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
-                    >
-                        <option value="">Body Type</option>
-                        {uniqueBodyTypes.map((bodyType) => (
-                            <option key={bodyType} value={bodyType}>
-                                {bodyType}
-                            </option>
-                        ))}
-                    </select>
-                    <select
-                        value={filters.fuel}
-                        onChange={(e) => setFilters({ ...filters, fuel: e.target.value })}
-                        className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
-                    >
-                        <option value="">Fuel</option>
-                        {uniqueFuels.map((fuel) => (
-                            <option key={fuel} value={fuel}>
-                                {fuel}
-                            </option>
-                        ))}
-                    </select>
-                    <select
-                        value={filters.drive}
-                        onChange={(e) => setFilters({ ...filters, drive: e.target.value })}
-                        className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
-                    >
-                        <option value="">Drive</option>
-                        {uniqueDrives.map((drive) => (
-                            <option key={drive} value={drive}>
-                                {drive}
-                            </option>
-                        ))}
-                    </select>
-                    <select
-                        value={filters.condition}
-                        onChange={(e) => setFilters({ ...filters, condition: e.target.value })}
-                        className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-backgroundDark dark:text-textDark"
-                    >
-                        <option value="">Condition</option>
-                        {uniqueConditions.map((condition) => (
-                            <option key={condition} value={condition}>
-                                {condition}
-                            </option>
-                        ))}
-                    </select>
-                </div>
+                <FilterComponent
+                    onFilterChange={handleFilterChange}
+                    uniqueMakes={uniqueMakes}
+                    uniqueModels={uniqueModels}
+                    uniqueTransmissions={uniqueTransmissions}
+                    uniqueBodyTypes={uniqueBodyTypes}
+                    uniqueFuels={uniqueFuels}
+                    uniqueDrives={uniqueDrives}
+                    uniqueConditions={uniqueConditions}
+                />
             </div>
         </div>
     );
