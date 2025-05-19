@@ -5,6 +5,7 @@ import Home from './Home.jsx';
 import UserProfile from './UserProfile';
 import AddCar from './AddCar.jsx';
 import { LikedCarsProvider } from './LikedCarsContext';
+import CarDetailsPage from './CarDetailPage.jsx';
 
 function App() {
   const [theme, setTheme] = useState(() => {
@@ -62,6 +63,7 @@ function App() {
             <Route path="/offers" element={<Offers />} />
             <Route path="/profile" element={<UserProfile />} />
             <Route path="/add-car" element={<AddCar />} />
+            <Route path="car-details/:carIndex" element={<CarDetailsPage />}/>
           </Routes>
         </LikedCarsProvider>
       </div>
